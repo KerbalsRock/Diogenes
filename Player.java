@@ -12,7 +12,9 @@ public class Player {
             VecUnit units = gc.myUnits();
             for (int i = 0; i < units.size(); i++) {
                 Unit unit = units.get(i);
-
+                if(true) {
+                	//github will see this
+                }
             }
             // Submit the actions we've done, and wait for our next turn.
             gc.nextTurn();
