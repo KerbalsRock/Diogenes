@@ -1,6 +1,5 @@
 import bc.GameController;
-	public class RangerManager extends AttackUnitManager{
-
+public class RangerManager extends AttackUnitManager{
 		public RangerManager(GameController gc) {
 			super(gc);
 		}
