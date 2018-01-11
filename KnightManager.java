@@ -7,4 +7,9 @@ public class KnightManager extends AttackUnitManager{
 	public KnightManager(GameController gc, int id ) {
 		super(gc, id);
 	}
+	
+	public boolean javelin() {
+		//TODO make this work
+		return false;
+	}
 }

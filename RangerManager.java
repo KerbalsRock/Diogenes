@@ -7,4 +7,8 @@ public class RangerManager extends AttackUnitManager{
 			super(gc, id);
 		}
 
+		public boolean snipe() {
+			//TODO make this work
+			return false;
+		}
 }

@@ -9,4 +9,8 @@ public class RocketManager extends BuildingManager{
 		super(gc, id);
 	}
 	
+	public boolean launch() {
+		//TODO make this work
+		return false;
+	}
 }

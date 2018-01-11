@@ -15,5 +15,9 @@ public class UnitManager extends Manager{
 		}
 		return false;
 	}
+	public boolean nextPathNode() {
+		//TODO make this work
+		return false;
+	}
 
 }

@@ -9,4 +9,9 @@ public class FactoryManager extends BuildingManager{
 		super(gc, id);
 	}
 	
+	public boolean makeUnit() {
+		//TODO make this work
+		return false;
+	}
+	
 }

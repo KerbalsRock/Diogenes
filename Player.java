@@ -11,10 +11,7 @@ public class Player {
             // VecUnit is a class that you can think of as similar to ArrayList<Unit>, but immutable.
             VecUnit units = gc.myUnits();
             for (int i = 0; i < units.size(); i++) {
-                Unit unit = units.get(i);
-                if(true) {
-                	//github will see this
-                }
+            		
             }
             // Submit the actions we've done, and wait for our next turn.
             gc.nextTurn();

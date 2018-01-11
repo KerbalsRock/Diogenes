@@ -8,5 +8,15 @@ public class BuildingManager extends Manager{
 		super(gc, id);
 	}
 	
+	public boolean load() {
+		//TODO make this work
+		return false;
+	}
+	
+	public boolean unload() {
+		//TODO make this work
+		return false;
+	}
+	
 
 }
