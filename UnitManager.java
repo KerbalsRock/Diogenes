@@ -1,20 +1,16 @@
 import bc.*;
 
-public class UnitManager{
-	protected GameController gc;
-	public int id;
-	
+public class UnitManager extends Manager{
 	public UnitManager(GameController gc) {
-		this.gc = gc;
+		super(gc);
 	}
 	public UnitManager(GameController gc, int id) {
-		this.gc = gc;
-		this.id = id;
+		super(gc,id);
 	}
 	
-	public void attack(int targetId) {
-		if(gc.canAttack(id, targetId) && gc.isAttackReady(id)) {
-			gc.attack(id, targetId);
+	public void move(Direction d) {
+		if(gc.canMove(id, d) && gc.isMoveReady(id)) {
+			gc.moveRobot(id, d);
 		}
 	}
 
