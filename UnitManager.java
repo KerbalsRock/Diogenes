@@ -8,10 +8,12 @@ public class UnitManager extends Manager{
 		super(gc,id);
 	}
 	
-	public void move(Direction d) {
+	public boolean move(Direction d) {
 		if(gc.canMove(id, d) && gc.isMoveReady(id)) {
 			gc.moveRobot(id, d);
+			return true;
 		}
+		return false;
 	}
 
 }

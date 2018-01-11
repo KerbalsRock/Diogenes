@@ -9,10 +9,12 @@ public class AttackUnitManager extends UnitManager{
 		super(gc, id);
 	}
 	
-	public void attack(int targetId) {
+	public boolean attack(int targetId) {
 		if(gc.canAttack(id, targetId) && gc.isAttackReady(id)) {
 			gc.attack(id, targetId);
+			return true;
 		}
+		return false;
 	}
 
 }
