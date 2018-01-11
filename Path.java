@@ -9,4 +9,12 @@ public class Path {
 		locList = list;
 	}
 	
+	public MapLocation getStart(){
+		return locList.get(0);
+	}
+	
+	public MapLocation getEnd(){
+		return locList.get(locList.size()-1);
+	}
+	
 }
