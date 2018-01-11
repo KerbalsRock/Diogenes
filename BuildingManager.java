@@ -8,13 +8,19 @@ public class BuildingManager extends Manager{
 		super(gc, id);
 	}
 	
-	public boolean load() {
-		//TODO make this work
+	public boolean load(int unitId) {
+		if(gc.canLoad(id, unitId)){
+			gc.load(id, unitId);
+			return true;
+		}
 		return false;
 	}
 	
-	public boolean unload() {
-		//TODO make this work
+	public boolean unload(Direction direction) {
+		if(gc.canUnload(id, direction)){
+			gc.unload(id, direction);
+			return true;
+		}
 		return false;
 	}
 	

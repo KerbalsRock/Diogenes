@@ -1,4 +1,5 @@
 import bc.GameController;
+import bc.MapLocation;
 public class MageManager extends AttackUnitManager{
 	public MageManager(GameController gc) {
 		super(gc);
@@ -7,8 +8,11 @@ public class MageManager extends AttackUnitManager{
 		super(gc, id);
 	}
 	
-	public boolean blink() {
-		//TODO make this work
+	public boolean blink(MapLocation location) {
+		if(gc.canBlink(id, location) && gc.isBlinkReady(id)){
+			gc.blink(id, location);
+			return true;
+		}
 		return false;
 	}
 

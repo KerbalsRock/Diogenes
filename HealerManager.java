@@ -8,13 +8,19 @@ public class HealerManager extends AttackUnitManager{
 		super(gc, id);
 	}
 	
-	public boolean heal() {
-		//TODO make this work
+	public boolean heal(int targetId) {
+		if(gc.canHeal(id, targetId) && gc.isHealReady(id)){
+			gc.heal(id, targetId);
+			return true;
+		}
 		return false;
 	}
 	
-	public boolean overcharge() {
-		//TODO make this work
+	public boolean overcharge(int targetId) {
+		if(gc.canOvercharge(id, targetId) && gc.isOverchargeReady(id)){
+			gc.overcharge(id, targetId);
+			return true;
+		}
 		return false;
 	}
 

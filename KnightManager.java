@@ -8,8 +8,11 @@ public class KnightManager extends AttackUnitManager{
 		super(gc, id);
 	}
 	
-	public boolean javelin() {
-		//TODO make this work
+	public boolean javelin(int targetId) {
+		if(gc.canJavelin(id, targetId) && gc.isJavelinReady(id)){
+			gc.javelin(id, targetId);
+			return true;
+		}
 		return false;
 	}
 }

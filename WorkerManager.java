@@ -7,28 +7,43 @@ public class WorkerManager extends UnitManager{
 			super(gc, id);
 		}
 		
-		public boolean blueprint() {
-			//TODO make this work
+		public boolean blueprint(UnitType type, Direction direction) {
+			if(gc.canBlueprint(id, type, direction)){
+				gc.blueprint(id, type, direction);
+				return true;
+			}
 			return false;
 		}
 		
-		public boolean build() {
-			//TODO make this work
+		public boolean build(int targetId) {
+			if(gc.canBuild(id, targetId)){
+				gc.build(id, targetId);
+				return true;
+			}
 			return false;
 		}
 		
-		public boolean repair() {
-			//TODO make this work
+		public boolean repair(int targetId) {
+			if(gc.canRepair(id, targetId)){
+				gc.repair(id, targetId);
+				return true;
+			}
 			return false;
 		}
 		
-		public boolean replicate() {
-			//TODO make this work
+		public boolean replicate(Direction direction) {
+			if(gc.canReplicate(id, direction)){
+				gc.replicate(id, direction);
+				return true;
+			}
 			return false;
 		}
 		
-		public boolean harvest() {
-			//TODO make this work
+		public boolean harvest(Direction direction) {
+			if(gc.canHarvest(id, direction)){
+				gc.harvest(id, direction);
+				return true;
+			}
 			return false;
 		}
 		

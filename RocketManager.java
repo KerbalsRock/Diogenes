@@ -1,4 +1,5 @@
 import bc.GameController;
+import bc.MapLocation;
 public class RocketManager extends BuildingManager{
 
 	public RocketManager(GameController gc) {
@@ -9,8 +10,11 @@ public class RocketManager extends BuildingManager{
 		super(gc, id);
 	}
 	
-	public boolean launch() {
-		//TODO make this work
+	public boolean launch(MapLocation destination) {
+		if(gc.canLaunchRocket(id, destination)){
+			gc.launchRocket(id, destination);
+			return true;
+		}
 		return false;
 	}
 }

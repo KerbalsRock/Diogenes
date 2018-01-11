@@ -9,8 +9,11 @@ public class FactoryManager extends BuildingManager{
 		super(gc, id);
 	}
 	
-	public boolean makeUnit() {
-		//TODO make this work
+	public boolean makeUnit(UnitType type) {
+		if(gc.canProduceRobot(id, type)){
+			gc.produceRobot(id, type);
+			return true;
+		}
 		return false;
 	}
 	

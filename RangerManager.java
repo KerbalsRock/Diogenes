@@ -1,4 +1,5 @@
 import bc.GameController;
+import bc.MapLocation;
 public class RangerManager extends AttackUnitManager{
 		public RangerManager(GameController gc) {
 			super(gc);
@@ -7,8 +8,11 @@ public class RangerManager extends AttackUnitManager{
 			super(gc, id);
 		}
 
-		public boolean snipe() {
-			//TODO make this work
+		public boolean snipe(MapLocation location) {
+			if(gc.canBeginSnipe(id, location) && gc.isBeginSnipeReady(id)){
+				gc.beginSnipe(id, location);
+				return true;
+			}
 			return false;
 		}
 }
