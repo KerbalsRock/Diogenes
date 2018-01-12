@@ -1,14 +1,24 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import bc.*;
 public class PlanetAnalyzer {
 	public GameController gc;
 	public PlanetMap p;
 	public ArrayList<ArrayList<MapLocation>> sections;
+	public ArrayList<MapLocation> impassable;
 	
 	public PlanetAnalyzer(GameController gc, PlanetMap p){
 		this.gc = gc;
 		this.p = p;
+	}
+	
+	public static ArrayList<MapLocation> getAdjacent(MapLocation loc){
+		List<MapLocation> list = (List) Arrays.asList(loc.translate(-1, 1), loc.translate(0, 1), loc.translate(1, 1), loc.translate(1, 0), loc.translate(1, -1), loc.translate(0, -1), loc.translate(-1, -1), loc.translate(-1, 0));
+		ArrayList<MapLocation> adjacent = new ArrayList<MapLocation>();
+		adjacent.addAll(list);
+		return adjacent;
 	}
 	
 	public void makeSections(MapLocation initial){
@@ -26,8 +36,36 @@ public class PlanetAnalyzer {
 			ArrayList<MapLocation> open = new ArrayList<MapLocation>();
 			ArrayList<MapLocation> closed = new ArrayList<MapLocation>();
 			open.add(initial);
+			unexplored.remove(initial);
 			while(!open.isEmpty()){
-				
+				for(MapLocation loc : open){
+					open.remove(loc);
+					for(MapLocation newloc : getAdjacent(loc)){
+						if(unexplored.contains(newloc)){
+							unexplored.remove(newloc);
+							if(p.isPassableTerrainAt(newloc) == 1){
+								open.add(newloc);
+							}
+							else{
+								impassable.add(newloc);
+							}
+						}
+					}
+					closed.add(loc);
+				}
+			}
+			sections.add(closed);
+			for(MapLocation loc : unexplored){
+				unexplored.remove(loc);
+				if(p.isPassableTerrainAt(loc) == 1){
+					initial = loc;
+					open.clear();
+					closed.clear();
+					break;
+				}
+				else{
+					impassable.add(loc);
+				}
 			}
 		}
 	}
