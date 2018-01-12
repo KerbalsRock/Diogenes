@@ -21,4 +21,11 @@ public class AStarNode {
 		parents.addAll(parent.parents);
 	}
 	
+	public void setParent(AStarNode parent) {
+		hasParent = true;
+		parents.clear();
+		parents.add(parent);
+		parents.addAll(parent.parents);
+	}
+	
 }
