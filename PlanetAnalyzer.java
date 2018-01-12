@@ -15,10 +15,18 @@ public class PlanetAnalyzer {
 		this.p = p;
 	}
 	
-	public static ArrayList<MapLocation> getAdjacent(MapLocation loc){
-		List<MapLocation> list = Arrays.asList(loc.translate(-1, 1), loc.translate(0, 1), loc.translate(1, 1), loc.translate(1, 0), loc.translate(1, -1), loc.translate(0, -1), loc.translate(-1, -1), loc.translate(-1, 0));
+	public ArrayList<MapLocation> getAdjacent(MapLocation loc){
 		ArrayList<MapLocation> adjacent = new ArrayList<MapLocation>();
-		adjacent.addAll(list);
+		for(int i = -1; i <= 1; i++){
+			for(int j = -1; j <= 1; j++){
+				if(loc.getX()+i < 0 || loc.getX()+i >= p.getWidth() || loc.getY()+i < 0 || loc.getY()+i >= p.getHeight()){
+					continue;
+				}
+				else if(!(i == 0 && j == 0)){
+					adjacent.add(loc.translate(i, j));
+				}
+			}
+		}
 		return adjacent;
 	}
 	
