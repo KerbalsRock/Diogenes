@@ -13,6 +13,7 @@ public class AStarNode {
 	public AStarNode(MapLocation current) {
 		mapLoc = current;
 		hasParent = false;
+		f = 999;
 	}
 	
 	public AStarNode(MapLocation current, AStarNode parent) {
@@ -22,6 +23,7 @@ public class AStarNode {
 		parents.add(parent);
 		parents.addAll(parent.parents);
 		g = getG();
+		f = 999;
 	}
 	
 	public void setParent(AStarNode parent) {
@@ -31,6 +33,7 @@ public class AStarNode {
 		parents.add(parent);
 		parents.addAll(parent.parents);
 		g = getG();
+		f = 999;
 	}
 	
 	public double getG() {

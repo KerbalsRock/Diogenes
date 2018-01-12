@@ -5,14 +5,7 @@ public class PathFinder {
 	
 	public AStarNode bestNodeAfterSearch;
 	
-	protected Island i;
-	public Island getIsland() {
-		return i;
-	}public void setIsland(Island island){
-		i = island;
-	}
-	
-	
+	public Island i;
 	
 	public PathFinder(Island i){
 		this.i = i;
@@ -67,5 +60,30 @@ public class PathFinder {
 	        }
         }
 		
+	}
+	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode) {
+		ArrayList<AStarNode> successors = new ArrayList<AStarNode>();
+		for(int i = -1; i <= 1; i++){
+			for(int j = -1; j <= 1; j++){
+				if(loc.getX()+i < 0 || loc.getX()+i >= p.getWidth() || loc.getY()+i < 0 || loc.getY()+i >= p.getHeight()){
+					continue;
+				}
+				else if(!(i == 0 && j == 0)){
+					adjacent.add(loc.translate(i, j));
+				}
+			}
+		}
+		return adjacent;
+	}
+	private AStarNode poll(ArrayList<AStarNode> openSet) {
+		double highestF = -1;
+		int highestFIndex = -1;
+		for(int i = 0; i < openSet.size(); i++) {
+			if(openSet.get(i).f > highestF) {
+				highestF = openSet.get(i).f;
+				highestFIndex = i;
+			}
+		}
+		return openSet.get(highestFIndex);
 	}
 }
