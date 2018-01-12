@@ -76,5 +76,6 @@ public class PlanetAnalyzer {
 	
 	public ArrayList<MapLocation> getIsland(MapLocation loc){
 		for(ArrayList<MapLocation> )
+			//fix stuff
 	}
 }
