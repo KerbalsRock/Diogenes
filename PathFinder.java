@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import bc.*;
 public class PathFinder {
 	
-	private int maxSteps;
 	public AStarNode bestNodeAfterSearch;
 	
 	protected Island i;
@@ -11,14 +10,12 @@ public class PathFinder {
 		return i;
 	}public void setIsland(Island island){
 		i = island;
-		maxSteps = i.list.size();
 	}
 	
 	
 	
 	public PathFinder(Island i){
 		this.i = i;
-		maxSteps = i.list.size();
 	}
 	
 	public Path generatePath(MapLocation startNode, MapLocation endNode) {
