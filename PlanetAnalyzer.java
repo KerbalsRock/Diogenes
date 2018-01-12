@@ -16,7 +16,7 @@ public class PlanetAnalyzer {
 	}
 	
 	public static ArrayList<MapLocation> getAdjacent(MapLocation loc){
-		List<MapLocation> list = (List) Arrays.asList(loc.translate(-1, 1), loc.translate(0, 1), loc.translate(1, 1), loc.translate(1, 0), loc.translate(1, -1), loc.translate(0, -1), loc.translate(-1, -1), loc.translate(-1, 0));
+		List<MapLocation> list = Arrays.asList(loc.translate(-1, 1), loc.translate(0, 1), loc.translate(1, 1), loc.translate(1, 0), loc.translate(1, -1), loc.translate(0, -1), loc.translate(-1, -1), loc.translate(-1, 0));
 		ArrayList<MapLocation> adjacent = new ArrayList<MapLocation>();
 		adjacent.addAll(list);
 		return adjacent;
