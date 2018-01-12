@@ -64,7 +64,7 @@ public class PathFinder {
 	                successorNode.setParent(currentNode);
 	                openSet.add(successorNode);
 	            } else {
-	                successorNode.setParent(currentNode););
+	                successorNode.setParent(currentNode);
 	                openSet.add(successorNode);
 	            }
 	        }
