@@ -17,14 +17,9 @@ public class PlanetAnalyzer {
 	
 	public ArrayList<MapLocation> getAdjacent(MapLocation loc){
 		ArrayList<MapLocation> adjacent = new ArrayList<MapLocation>();
-		for(int i = -1; i <= 1; i++){
-			for(int j = -1; j <= 1; j++){
-				if(loc.getX()+i < 0 || loc.getX()+i >= p.getWidth() || loc.getY()+i < 0 || loc.getY()+i >= p.getHeight()){
-					continue;
-				}
-				else if(!(i == 0 && j == 0)){
-					adjacent.add(loc.translate(i, j));
-				}
+		for(Direction d : Direction.values()){
+			if(p.onMap(loc.add(d)) && d != Direction.Center){
+				adjacent.add(loc.add(d));
 			}
 		}
 		return adjacent;
