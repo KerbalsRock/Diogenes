@@ -7,7 +7,7 @@ import bc.*;
 public class PlanetAnalyzer {
 	public GameController gc;
 	public PlanetMap p;
-	public ArrayList<ArrayList<MapLocation>> sections;
+	public ArrayList<ArrayList<MapLocation>> islands;
 	public ArrayList<MapLocation> impassable;
 	
 	public PlanetAnalyzer(GameController gc, PlanetMap p){
@@ -22,7 +22,7 @@ public class PlanetAnalyzer {
 		return adjacent;
 	}
 	
-	public void makeSections(MapLocation initial){
+	public void makeIslands(MapLocation initial){
 		//probably do breadth first search from ourStart and move all found passable locations from unexplored
 		//to section 1, and all found impassable locations to impassable, then iterate through unexplored and
 		//add all impassable to impassable and start a new bfs at any new passable location and repeat
@@ -58,7 +58,7 @@ public class PlanetAnalyzer {
 					closed.add(loc);
 				}
 			}
-			sections.add(closed);
+			islands.add(closed);
 			for(MapLocation loc : unexplored){
 				unexplored.remove(loc);
 				if(p.isPassableTerrainAt(loc) == 1){
@@ -72,5 +72,9 @@ public class PlanetAnalyzer {
 				}
 			}
 		}
+	}
+	
+	public ArrayList<MapLocation> getIsland(MapLocation loc){
+		for(ArrayList<MapLocation> )
 	}
 }
