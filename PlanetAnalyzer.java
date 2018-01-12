@@ -7,7 +7,7 @@ import bc.*;
 public class PlanetAnalyzer {
 	public GameController gc;
 	public PlanetMap p;
-	public ArrayList<ArrayList<MapLocation>> islands;
+	public ArrayList<Island> islands;
 	public ArrayList<MapLocation> impassable;
 	
 	public PlanetAnalyzer(GameController gc, PlanetMap p){
@@ -58,7 +58,7 @@ public class PlanetAnalyzer {
 					closed.add(loc);
 				}
 			}
-			islands.add(closed);
+			islands.add(new Island(closed));
 			for(MapLocation loc : unexplored){
 				unexplored.remove(loc);
 				if(p.isPassableTerrainAt(loc) == 1){
@@ -74,8 +74,12 @@ public class PlanetAnalyzer {
 		}
 	}
 	
-	public ArrayList<MapLocation> getIsland(MapLocation loc){
-		for(ArrayList<MapLocation> )
-			//fix stuff
+	public Island getIsland(MapLocation loc){
+		for(Island i : islands){
+			if(i.list.contains(loc)){
+				return i;
+			}
+		}
+		return null;
 	}
 }
