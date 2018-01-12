@@ -54,7 +54,7 @@ public class PathFinder {
 	                inOpenSet = false;
 	            }
 	            //compute tentativeG
-	            double tentativeG = currentNode.g() + 1;
+	            double tentativeG = currentNode.getG() + 1;
 	            //node was already discovered and this path is worse than the last one
 	            if(inOpenSet && tentativeG >= successorNode.getG()) {
 	                continue;
