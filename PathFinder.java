@@ -1,8 +1,8 @@
 import bc.*;
-public class PathMaker {
+public class PathFinder {
 	PlanetMap p;
 	
-	public PathMaker(PlanetMap p){
+	public PathFinder(PlanetMap p){
 		this.p = p;
 	}
 	
