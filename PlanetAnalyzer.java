@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import bc.*;
 public class PlanetAnalyzer {
@@ -22,10 +23,13 @@ public class PlanetAnalyzer {
 	}
 	
 	public void makeSections(MapLocation initial){
-		//TODO make this
 		//probably do breadth first search from ourStart and move all found passable locations from unexplored
 		//to section 1, and all found impassable locations to impassable, then iterate through unexplored and
-		//add all impassable to impassable and start a new bfs at any new passable location and reapeat
+		//add all impassable to impassable and start a new bfs at any new passable location and repeat
+		while(p.isPassableTerrainAt(initial) == 0){
+			Random r = new Random();
+			initial = new MapLocation(p.getPlanet(), r.nextInt((int)p.getWidth()), r.nextInt((int)p.getHeight()));
+		}
 		ArrayList<MapLocation> unexplored = new ArrayList<MapLocation>();
 		for(int i = 0; i < p.getWidth(); i++){
 			for(int j = 0; j < p.getHeight(); j++){
