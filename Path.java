@@ -8,7 +8,7 @@ public class Path {
 	public Path(ArrayList<MapLocation> list) {
 		locList = list;
 	}
-	
+		
 	public MapLocation getStart(){
 		return locList.get(0);
 	}
