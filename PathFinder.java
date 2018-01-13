@@ -79,7 +79,9 @@ public class PathFinder {
 			AStarNode value = island.convertToHashMap().get(locs.get(i));
 			if (value != null) {
 			    if(!closedSet.contains(value)){
-			    		value.setParent(currentNode);
+			    		if(!value.hasParent) {
+			    			value.setParent(currentNode);
+			    		}
 			    		value.h = Math.max(Math.abs(value.mapLoc.getX()-endNode.mapLoc.getX()), 
 			    				Math.abs(value.mapLoc.getY()-endNode.mapLoc.getY()));
 			    		value.f = value.h + value.g;
