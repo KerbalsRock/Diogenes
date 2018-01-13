@@ -15,4 +15,12 @@ public class Path {
 		return locList.get(locList.size()-1);
 	}
 	
+	public String toString() {
+		String s = "";
+		for(int i = 0; i < locList.size(); i++) {
+			s += i+1 + ": (" + locList.get(i).getX() + " ," + locList.get(i).getY() + ")\n";
+		}
+		return s;
+	}
+	
 }
