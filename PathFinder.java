@@ -44,30 +44,21 @@ public class PathFinder {
 			ArrayList<AStarNode> successorNodes = getSuccessors(currentNode, endNode, closedSet);
 	        for(AStarNode successorNode : successorNodes) {
 	            boolean inOpenSet;
-	            if(closedSet.contains(successorNode)) {
-	                continue;
-	            }
+	            //don't need to check for closed set twice
 	            /* Special rule for nodes that are generated within other nodes:
 	             * We need to ensure that we use the node and
 	             * its g value from the openSet if its already discovered
 	             */
-	            if(openSet.contains(successorNode)) {
-	                inOpenSet = true;
-	            } else {
-	                inOpenSet = false;
-	            }
+	            inOpenSet = openSet.contains(successorNode);
 	            //compute tentativeG
 	            double tentativeG = currentNode.getG() + 1;
 	            //node was already discovered and this path is worse than the last one
 	            if(inOpenSet && tentativeG >= successorNode.getG()) {
 	                continue;
 	            }
-	            if(inOpenSet) {
-	                openSet.remove(successorNode);
-	                successorNode.setParent(currentNode);
-	                openSet.add(successorNode);
-	            } else {
-	                successorNode.setParent(currentNode);
+	            //don't need to take it out and put it back in
+	            successorNode.setParent(currentNode);
+	            if(!inOpenSet){
 	                openSet.add(successorNode);
 	            }
 	        }
@@ -88,8 +79,8 @@ public class PathFinder {
 			if (value != null) {
 			    if(!closedSet.contains(value)){
 			    		value.setParent(currentNode);
-			    		value.h = Math.sqrt(Math.pow(Math.abs(value.mapLoc.getX()  - endNode.mapLoc.getX()), 2)
-			    				+ Math.pow(Math.abs(value.mapLoc.getY()  - endNode.mapLoc.getY()), 2));
+			    		value.h = Math.max(Math.abs(value.mapLoc.getX()-endNode.mapLoc.getX()), 
+			    				Math.abs(value.mapLoc.getY()-endNode.mapLoc.getY()));
 			    		value.f = value.h + value.g;
 			    		successors.add(value);
 			    }
@@ -100,14 +91,15 @@ public class PathFinder {
 	}
 
 	private AStarNode poll(ArrayList<AStarNode> openSet) {
-		double highestF = -1;
-		int highestFIndex = -1;
+		double lowestF = 1000;
+		int lowestFIndex = -1;
 		for(int i = 0; i < openSet.size(); i++) {
-			if(openSet.get(i).f > highestF) {
-				highestF = openSet.get(i).f;
-				highestFIndex = i;
+			if(openSet.get(i).f < lowestF) {
+				//do they have to have an f
+				lowestF = openSet.get(i).f;
+				lowestFIndex = i;
 			}
 		}
-		return openSet.get(highestFIndex);
+		return openSet.get(lowestFIndex);
 	}
 }
