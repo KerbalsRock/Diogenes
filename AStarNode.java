@@ -9,7 +9,7 @@ public class AStarNode {
 	public ArrayList<AStarNode> parents;
 	public AStarNode parent;
 	public boolean hasParent;
-	
+		
 	public AStarNode(MapLocation current) {
 		mapLoc = current;
 		hasParent = false;
@@ -33,7 +33,6 @@ public class AStarNode {
 		parents.add(parent);
 		parents.addAll(parent.parents);
 		g = getG();
-		f = 999;
 	}
 	
 	public double getG() {
