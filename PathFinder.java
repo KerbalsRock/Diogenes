@@ -32,8 +32,8 @@ public class PathFinder {
 	private AStarNode search(AStarNode startNode, AStarNode endNode) {
 		ArrayList<AStarNode> openSet = new ArrayList<AStarNode>();
 		ArrayList<AStarNode> closedSet = new ArrayList<AStarNode>();
-		int steps = 0;
 		
+		openSet.add(startNode);		
 		while(openSet.size() > 0) {
 			AStarNode currentNode = poll(openSet);
 			if(endNode.mapLoc.equals(currentNode.mapLoc)) {
@@ -72,6 +72,7 @@ public class PathFinder {
 	            }
 	        }
         }
+		return null;
 		
 	}
 	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode, ArrayList<AStarNode> closedSet) {
