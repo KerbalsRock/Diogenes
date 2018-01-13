@@ -33,7 +33,8 @@ public class PathFinder {
 		ArrayList<AStarNode> openSet = new ArrayList<AStarNode>();
 		ArrayList<AStarNode> closedSet = new ArrayList<AStarNode>();
 		
-		openSet.add(startNode);		
+		closedSet.add(startNode);
+		openSet.addAll(getSuccessors(startNode, endNode, closedSet));
 		while(openSet.size() > 0) {
 			AStarNode currentNode = poll(openSet);
 			if(endNode.mapLoc.equals(currentNode.mapLoc)) {
