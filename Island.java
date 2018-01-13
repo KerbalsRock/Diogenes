@@ -9,9 +9,10 @@ public class Island {
 	HashMap<MapLocation, AStarNode> map = new HashMap<MapLocation, AStarNode>();
 	public Island (ArrayList<MapLocation> list){
 		this.list = list;
+		aStarList = new ArrayList<AStarNode>();
 	}
 	public ArrayList<AStarNode> convertToAStar(){
-		if(aStarList == null){
+		if(aStarList.size() == 0){
 			for(MapLocation loc : list){
 				aStarList.add(new AStarNode(loc));
 			}

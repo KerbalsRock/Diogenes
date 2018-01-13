@@ -98,7 +98,6 @@ public class PathFinder {
 		int lowestFIndex = -1;
 		for(int i = 0; i < openSet.size(); i++) {
 			if(openSet.get(i).f < lowestF) {
-				//do they have to have an f
 				lowestF = openSet.get(i).f;
 				lowestFIndex = i;
 			}
