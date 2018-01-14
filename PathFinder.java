@@ -34,16 +34,14 @@ public class PathFinder {
 		ArrayList<AStarNode> closedSet = new ArrayList<AStarNode>();
 		
 		closedSet.add(startNode);
-		openSet.addAll(getSuccessors(startNode, endNode, closedSet));
+		openSet.addAll(getSuccessors(startNode, endNode, closedSet, openSet));
 		while(openSet.size() > 0) {
 			AStarNode currentNode = poll(openSet);
 			if(endNode.mapLoc.equals(currentNode.mapLoc)) {
 				bestNodeAfterSearch = currentNode;
 				return currentNode;
 			}
-			closedSet.add(currentNode);
-	        openSet.remove(currentNode);
-			ArrayList<AStarNode> successorNodes = getSuccessors(currentNode, endNode, closedSet);
+			ArrayList<AStarNode> successorNodes = getSuccessors(currentNode, endNode, closedSet, openSet);
 	        for(AStarNode successorNode : successorNodes) {
 	            boolean inOpenSet;
 	            //don't need to check for closed set twice
@@ -59,6 +57,7 @@ public class PathFinder {
 	                continue;
 	            }
 	            //don't need to take it out and put it back in
+	            //WOOOO
 	            successorNode.setParent(currentNode);
 	            if(!inOpenSet){
 	                openSet.add(successorNode);
@@ -69,7 +68,7 @@ public class PathFinder {
 		return null;
 		
 	}
-	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode, ArrayList<AStarNode> closedSet) {
+	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode, ArrayList<AStarNode> closedSet, ArrayList<AStarNode> openSet) {
 		ArrayList<AStarNode> successors = new ArrayList<AStarNode>();
 		ArrayList<MapLocation> locs = new ArrayList<MapLocation>();
 		for(Direction d : Direction.values()){
@@ -92,6 +91,7 @@ public class PathFinder {
 			}
 		}
 		closedSet.add(currentNode);
+		openSet.remove(currentNode);
 		return successors;
 	}
 

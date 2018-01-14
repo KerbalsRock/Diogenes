@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-
 import bc.*;
+
 public class PlanetAnalyzer {
 	public GameController gc;
 	public PlanetMap p;
