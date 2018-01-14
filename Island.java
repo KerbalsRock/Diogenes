@@ -6,7 +6,7 @@ import bc.*;
 public class Island {
 	public ArrayList<MapLocation> list;
 	public ArrayList<AStarNode> aStarList;
-	HashMap<MapLocation, AStarNode> map = new HashMap<MapLocation, AStarNode>();
+	HashMap<String, AStarNode> map = new HashMap<String, AStarNode>();
 	public Island (ArrayList<MapLocation> list){
 		this.list = list;
 		aStarList = new ArrayList<AStarNode>();
@@ -19,11 +19,13 @@ public class Island {
 		}
 		return aStarList;
 	}
-	public HashMap<MapLocation, AStarNode> convertToHashMap(){
-		 for(AStarNode node : convertToAStar()){
-			 map.put(node.mapLoc, node);
-		 }
-		 return map;
+	public HashMap<String, AStarNode> convertToHashMap(){
+		if(map.isEmpty()){
+			for(AStarNode node : convertToAStar()){
+				map.put(node.mapLoc.toString(), node);
+			}
+		}
+		return map;
 	}
 	
 }
