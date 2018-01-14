@@ -25,6 +25,7 @@ public class PlanetAnalyzer {
 		return adjacent;
 	}
 	
+	//undelete this
 	public void makeIslands(MapLocation initial){
 		//probably do breadth first search from ourStart and move all found passable locations from unexplored
 		//to section 1, and all found impassable locations to impassable, then iterate through unexplored and
