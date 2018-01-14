@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 import bc.*;
-public class MapAnalyzer {
+public class GameAnalyzer {
 	public GameController gc;
 	public PlanetAnalyzer earth;
 	public PlanetAnalyzer mars;
@@ -9,8 +9,14 @@ public class MapAnalyzer {
 	public AsteroidPattern asteroids;
 	public ArrayList<MapLocation> ourStart;
 	public ArrayList<MapLocation> enemyStart;
+	private int startingIslandSize;
+	private int nodesToEnemy;
+	private int startingWorkers;
+	private int availableKarb;
+	private double earthScore;
 	
-	public MapAnalyzer(GameController gc){
+	
+	public GameAnalyzer(GameController gc){
 		this.gc = gc;
 		findStartingLocs();
 		earth = new PlanetAnalyzer(gc, gc.startingMap(Planet.Earth));
@@ -19,12 +25,13 @@ public class MapAnalyzer {
 		mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));
 		orbit = gc.orbitPattern();
 		asteroids = gc.asteroidPattern();
+		availableKarb = 0;
 		analyzeEarth();
 		analyzeMars();
 		analyzeOrbit();
 	}
 	
-	public void findStartingLocs(){
+	private void findStartingLocs(){
 		for(int i = 0; i < earth.p.getInitial_units().size(); i++){
 			Unit u = earth.p.getInitial_units().get(i);
 			if(u.team() == gc.team()){
@@ -36,15 +43,23 @@ public class MapAnalyzer {
 
 	}
 	
-	public void analyzeEarth(){		
+	private void analyzeEarth(){
+		PathFinder p = new PathFinder(earth.islands.get(0));
+		PlanetMap pl = new PlanetMap();
+		startingIslandSize = earth.islands.get(0).list.size();
+		nodesToEnemy = p.generatePath(ourStart.get(0), enemyStart.get(0)).locList.size();
+		for(MapLocation mapLoc : earth.islands.get(0).list) {
+			availableKarb += pl.initialKarboniteAt(mapLoc);
+		}
+		
+		earthScore = nodesToEnemy*(availableKarb/startingIslandSize)* startingWorkers;
+	}
+	
+	private void analyzeMars(){
 		//TODO make this
 	}
 	
-	public void analyzeMars(){
-		//TODO make this
-	}
-	
-	public void analyzeOrbit(){
+	private void analyzeOrbit(){
 		//TODO make this
 	}
 	

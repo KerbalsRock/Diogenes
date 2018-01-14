@@ -34,14 +34,14 @@ public class PathFinder {
 		ArrayList<AStarNode> closedSet = new ArrayList<AStarNode>();
 		
 		closedSet.add(startNode);
-		openSet.addAll(getSuccessors(startNode, endNode, closedSet));
+		openSet.addAll(getSuccessors(startNode, endNode, closedSet, openSet));
 		while(openSet.size() > 0) {
 			AStarNode currentNode = poll(openSet);
 			if(endNode.mapLoc.equals(currentNode.mapLoc)) {
 				bestNodeAfterSearch = currentNode;
 				return currentNode;
 			}
-			ArrayList<AStarNode> successorNodes = getSuccessors(currentNode, endNode, closedSet);
+			ArrayList<AStarNode> successorNodes = getSuccessors(currentNode, endNode, closedSet, openSet);
 	        for(AStarNode successorNode : successorNodes) {
 	            boolean inOpenSet;
 	            //don't need to check for closed set twice
