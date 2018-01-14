@@ -41,7 +41,8 @@ public class PathFinder {
 				bestNodeAfterSearch = currentNode;
 				return currentNode;
 			}
-			
+			closedSet.add(currentNode);
+	        openSet.remove(currentNode);
 			ArrayList<AStarNode> successorNodes = getSuccessors(currentNode, endNode, closedSet);
 	        for(AStarNode successorNode : successorNodes) {
 	            boolean inOpenSet;
@@ -63,6 +64,7 @@ public class PathFinder {
 	                openSet.add(successorNode);
 	            }
 	        }
+	        
         }
 		return null;
 		
