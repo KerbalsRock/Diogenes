@@ -14,9 +14,9 @@ public class MapAnalyzer {
 		this.gc = gc;
 		findStartingLocs();
 		earth = new PlanetAnalyzer(gc, gc.startingMap(Planet.Earth));
-		earth.makeSections(ourStart.get(0));
+		earth.makeIslands(ourStart.get(0));
 		mars = new PlanetAnalyzer(gc, gc.startingMap(Planet.Mars));
-		mars.makeSections((new MapLocation(Planet.Mars, 0, 0)));
+		mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));
 		orbit = gc.orbitPattern();
 		asteroids = gc.asteroidPattern();
 		analyzeEarth();
