@@ -141,19 +141,17 @@ public class PathFinder {
 	}
 	
 	private AStarNode search(AStarNode startNode, AStarNode endNode) {
+		System.out.println("start node: "+startNode);
+		System.out.println("end node: "+endNode);
 		PriorityQueue<AStarNode> openSet = new PriorityQueue<AStarNode>(new NodeComparer());
 		ArrayList<AStarNode> closedSet = new ArrayList<AStarNode>();
-		System.out.println(startNode);
+		int nodesExpanded = 0;
 		openSet.add(startNode);
-		System.out.println(openSet.peek().mapLoc);
-		System.out.println(endNode);
 		while(!openSet.peek().equals(endNode)) {
-			System.out.println("made it");
 			AStarNode currentNode = openSet.poll();
 			closedSet.add(currentNode);
 			
 			for(AStarNode successorNode : getSuccessors(currentNode, endNode)) {
-				System.out.println(successorNode.mapLoc);
 				double cost = currentNode.g + 1;
 	            boolean inOpenSet = openSet.contains(successorNode);
 	            
@@ -166,17 +164,17 @@ public class PathFinder {
 	            	successorNode.h = Math.max(Math.abs(successorNode.mapLoc.getX()-endNode.mapLoc.getX()), 
 		    				Math.abs(successorNode.mapLoc.getY()-endNode.mapLoc.getY()));
 		    		successorNode.f = successorNode.h + successorNode.g;
-		    		System.out.println(currentNode);
 	            	successorNode.setParent(currentNode);
 	            }
 	        }
-			System.out.println("did one loop");
+			System.out.println("open set: "+openSet);
+			System.out.println("closed set: "+closedSet);
+			System.out.println("nodes expanded: "+nodesExpanded);
+			nodesExpanded++;
         }
-		System.out.println("uh oh");
-		return null;		
+		return endNode;		
 	}
 	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode) {
-		System.out.println("entered successors");
 		ArrayList<AStarNode> successors = new ArrayList<AStarNode>();
 		ArrayList<MapLocation> locs = new ArrayList<MapLocation>();
 		for(Direction d : Direction.values()){
@@ -184,16 +182,12 @@ public class PathFinder {
 				locs.add(currentNode.mapLoc.add(d));
 			}
 		}
-		System.out.println(locs);
 		for(int i = 0; i < locs.size(); i++) {
 			AStarNode value = island.convertToHashMap().get(locs.get(i).toString());
-			System.out.println(locs.get(i));
 			if (value != null) {
-				System.out.println("added to successors: " + value);
 				successors.add(value);
 			}
 		}
-		System.out.println(successors);
 		return successors;
 	}
 }

@@ -30,15 +30,18 @@ public class AStarNode {
 		hasParent = true;
 		this.parent = parent;
 		parents.clear();
-		System.out.println("parent :" +parent);
 		parents.add(parent);
 		parents.addAll(parent.parents);
 		g = getG();
 	}
 	
 	public double getG() {
-		g = parents.size()-1;
+		g = parents.size();
 		return g;
+	}
+	
+	public String toString(){
+		return "("+mapLoc.getX()+", "+mapLoc.getY()+")";
 	}
 	
 }

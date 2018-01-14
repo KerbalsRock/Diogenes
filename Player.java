@@ -42,8 +42,8 @@ public class Player {
     
     // Connect to the manager, starting the game
    	GameController gc = new GameController();
+   	tester.testPathfinder(island1);
     while (true) {
-    		tester.testPathfinder(island1);
  
         // Submit the actions we've done, and wait for our next turn.
         gc.nextTurn();
