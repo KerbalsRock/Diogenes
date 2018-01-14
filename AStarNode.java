@@ -6,7 +6,7 @@ public class AStarNode {
 	public double f;
 	public double g;
 	public double h;
-	public ArrayList<AStarNode> parents;
+	public ArrayList<AStarNode> parents = new ArrayList<AStarNode>();
 	public AStarNode parent;
 	public boolean hasParent;
 		
@@ -30,6 +30,7 @@ public class AStarNode {
 		hasParent = true;
 		this.parent = parent;
 		parents.clear();
+		System.out.println("parent :" +parent);
 		parents.add(parent);
 		parents.addAll(parent.parents);
 		g = getG();
