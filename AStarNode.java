@@ -32,7 +32,7 @@ public class AStarNode {
 		parents.clear();
 		parents.add(parent);
 		parents.addAll(parent.parents);
-		g = getG();
+		getG();
 	}
 	
 	public double getG() {
