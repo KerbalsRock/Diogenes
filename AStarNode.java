@@ -36,12 +36,21 @@ public class AStarNode {
 	}
 	
 	public double getG() {
-		g = parents.size();
+		g = parents.size() + 1;
 		return g;
 	}
 	
 	public String toString(){
 		return "("+mapLoc.getX()+", "+mapLoc.getY()+")";
+	}
+	
+	public void clear() {
+		g = 0;
+		h = 0;
+		f = 0;
+		hasParent = false;
+		parent = null;
+		parents.clear();;
 	}
 	
 }

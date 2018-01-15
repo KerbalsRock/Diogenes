@@ -19,7 +19,6 @@ public class Test {
 			System.out.println("It took " + mil + " milliseconds");
 			average += mil;
 		}
-		//discord test
 		System.out.println("It took an average of " + average/iterations + " milliseconds");
 		System.out.println();
 	}
