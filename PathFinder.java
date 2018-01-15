@@ -1,3 +1,4 @@
+
 /*import java.util.ArrayList;
 import java.util.HashMap;
 import bc.*;
@@ -114,77 +115,85 @@ import java.util.PriorityQueue;
 import bc.*;
 
 public class PathFinder {
-	
+
 	public AStarNode bestNodeAfterSearch;
-	
+
 	private Island island;
+
 	public Island getIsland() {
 		return island;
-	}public void setIsland(Island island){
+	}
+
+	public void setIsland(Island island) {
 		this.island = island;
 	}
-	
-	
-	
-	public PathFinder(Island island){
+
+	public PathFinder(Island island) {
 		this.island = island;
 	}
-	
+
 	public Path generatePath(MapLocation startLoc, MapLocation endLoc) {
-		AStarNode tempNode = search(island.convertToHashMap().get(startLoc.toString()) , island.convertToHashMap().get(endLoc.toString()));
+		AStarNode tempNode = search(island.convertToHashMap().get(startLoc.toString()),
+				island.convertToHashMap().get(endLoc.toString()));
 		ArrayList<MapLocation> locList = new ArrayList<MapLocation>();
 		locList.add(tempNode.mapLoc);
-		for(AStarNode n : tempNode.parents) {
+		for (AStarNode n : tempNode.parents) {
 			locList.add(n.mapLoc);
 		}
 		return new Path(locList);
 	}
-	
+
 	private AStarNode search(AStarNode startNode, AStarNode endNode) {
-		System.out.println("start node: "+startNode);
-		System.out.println("end node: "+endNode);
+		System.out.println("start node: " + startNode);
+		System.out.println("end node: " + endNode);
 		PriorityQueue<AStarNode> openSet = new PriorityQueue<AStarNode>(new NodeComparer());
 		ArrayList<AStarNode> closedSet = new ArrayList<AStarNode>();
 		int nodesExpanded = 0;
 		openSet.add(startNode);
-		while(!openSet.peek().equals(endNode)) {
+		while (!openSet.peek().equals(endNode)) {
 			AStarNode currentNode = openSet.poll();
 			closedSet.add(currentNode);
-			
-			for(AStarNode successorNode : getSuccessors(currentNode, endNode)) {
-				double cost = currentNode.g + 1;
-	            boolean inOpenSet = openSet.contains(successorNode);
-	            
-	            if(inOpenSet && cost < successorNode.getG()){
-	            	openSet.remove(successorNode);
-	            }
-	            if(!inOpenSet && !closedSet.contains(successorNode)){
-	            	successorNode.g = cost;
-	            	openSet.add(successorNode);
-	            	successorNode.h = Math.max(Math.abs(successorNode.mapLoc.getX()-endNode.mapLoc.getX()), 
-		    				Math.abs(successorNode.mapLoc.getY()-endNode.mapLoc.getY()));
-		    		successorNode.f = successorNode.h + successorNode.g;
-	            	successorNode.setParent(currentNode);
-	            }
-	        }
-			System.out.println("open set: "+openSet);
-			System.out.println("closed set: "+closedSet);
-			System.out.println("nodes expanded: "+nodesExpanded);
+
+			for (AStarNode successorNode : getSuccessors(currentNode, endNode, closedSet)) {
+				double estimatedG = currentNode.g + 1;
+				boolean inOpenSet = openSet.contains(successorNode);
+
+				if (inOpenSet && estimatedG > successorNode.getG()) {
+					continue;
+				}
+				if (inOpenSet && estimatedG < successorNode.getG()) {
+					openSet.remove(successorNode);
+					inOpenSet = false;
+				}
+				if (!inOpenSet && !closedSet.contains(successorNode)) {
+					successorNode.setParent(currentNode);				
+					successorNode.h = Math.max(Math.abs(successorNode.mapLoc.getX() - endNode.mapLoc.getX()),
+							Math.abs(successorNode.mapLoc.getY() - endNode.mapLoc.getY()));
+					successorNode.f = successorNode.h + successorNode.g;
+					openSet.add(successorNode);
+					
+				}
+			}
+			System.out.println("open set: " + openSet);
+			System.out.println("closed set: " + closedSet);
+			System.out.println("nodes expanded: " + nodesExpanded);
 			nodesExpanded++;
-        }
-		return endNode;		
+		}
+		return endNode;
 	}
-	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode) {
+
+	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode,
+			ArrayList<AStarNode> closedSet) {
 		ArrayList<AStarNode> successors = new ArrayList<AStarNode>();
 		ArrayList<MapLocation> locs = new ArrayList<MapLocation>();
-		for(Direction d : Direction.values()){
-			if(d != Direction.Center){
+		for (Direction d : Direction.values()) {
+			if (d != Direction.Center) {
 				locs.add(currentNode.mapLoc.add(d));
 			}
 		}
-		for(int i = 0; i < locs.size(); i++) {
+		for (int i = 0; i < locs.size(); i++) {
 			AStarNode value = island.convertToHashMap().get(locs.get(i).toString());
-			if (value != null) {
+			if (value != null && !closedSet.contains(value)) {
 				successors.add(value);
 			}
 		}

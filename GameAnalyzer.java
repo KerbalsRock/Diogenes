@@ -13,7 +13,7 @@ public class GameAnalyzer {
 	private int nodesToEnemy;
 	private int startingWorkers;
 	private int availableKarb;
-	private double earthScore;
+	public double earthScore;
 	
 	
 	public GameAnalyzer(GameController gc){

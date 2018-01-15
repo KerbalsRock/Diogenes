@@ -44,16 +44,19 @@ public class PathFinder2 {
 				double cost = currentNode.g + 1;
 	            boolean inOpenSet = openSet.contains(successorNode);
 	            
-	            if(inOpenSet && cost < successorNode.getG()){
-	            	openSet.remove(successorNode);
+	            if(inOpenSet && cost < successorNode.g){
+	            		openSet.remove(successorNode);
 	            }
+	            if(inOpenSet && cost > successorNode.g) {
+	            		continue;
+	            }
+	            
 	            if(!inOpenSet && !closedSet.contains(successorNode)){
-	            	successorNode.g = cost;
-	            	openSet.add(successorNode);
-	            	successorNode.h = Math.max(Math.abs(successorNode.mapLoc.getX()-endNode.mapLoc.getX()), 
-		    				Math.abs(successorNode.mapLoc.getY()-endNode.mapLoc.getY()));
-		    		successorNode.f = successorNode.h + successorNode.g;
-	            	successorNode.setParent(currentNode);
+	            		successorNode.setParent(currentNode);
+		            	successorNode.h = Math.max(Math.abs(successorNode.mapLoc.getX()-endNode.mapLoc.getX()), 
+			    				Math.abs(successorNode.mapLoc.getY()-endNode.mapLoc.getY()));
+			    		successorNode.f = successorNode.h + successorNode.g;
+		            	openSet.add(successorNode);
 	            }
 	        }
         }
@@ -68,7 +71,7 @@ public class PathFinder2 {
 			}
 		}
 		for(int i = 0; i < locs.size(); i++) {
-			AStarNode value = island.convertToHashMap().get(locs.get(i));
+			AStarNode value = island.convertToHashMap().get(locs.get(i).toString());
 			if (value != null) {
 				successors.add(value);
 			}
