@@ -158,10 +158,10 @@ public class PathFinder {
 				double estimatedG = currentNode.g + 1;
 				boolean inOpenSet = openSet.contains(successorNode);
 
-				if (inOpenSet && estimatedG > successorNode.getG()) {
+				if (inOpenSet && estimatedG > successorNode.g) {
 					continue;
 				}
-				if (inOpenSet && estimatedG < successorNode.getG()) {
+				if (inOpenSet && estimatedG < successorNode.g) {
 					openSet.remove(successorNode);
 					inOpenSet = false;
 				}
