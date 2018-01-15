@@ -75,8 +75,7 @@ public class PathFinder {
 		return endNode;
 	}
 
-	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode,
-			ArrayList<AStarNode> closedSet) {
+	private ArrayList<AStarNode> getSuccessors(AStarNode currentNode, AStarNode endNode, ArrayList<AStarNode> closedSet) {
 		ArrayList<AStarNode> successors = new ArrayList<AStarNode>();
 		ArrayList<MapLocation> locs = new ArrayList<MapLocation>();
 		for (Direction d : Direction.values()) {
