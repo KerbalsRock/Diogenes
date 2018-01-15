@@ -157,6 +157,7 @@ public class PathFinder {
 			for (AStarNode successorNode : getSuccessors(currentNode, endNode, closedSet)) {
 				double estimatedG = currentNode.g + 1;
 				boolean inOpenSet = openSet.contains(successorNode);
+				boolean inClosedSet = closedSet.contains(successorNode);
 
 				if (inOpenSet && estimatedG > successorNode.g) {
 					continue;
@@ -165,11 +166,12 @@ public class PathFinder {
 					openSet.remove(successorNode);
 					inOpenSet = false;
 				}
-				if (!inOpenSet && !closedSet.contains(successorNode)) {
+				if (!inOpenSet && !inClosedSet){
 					successorNode.setParent(currentNode);				
 					successorNode.h = Math.max(Math.abs(successorNode.mapLoc.getX() - endNode.mapLoc.getX()),
 							Math.abs(successorNode.mapLoc.getY() - endNode.mapLoc.getY()));
 					successorNode.f = successorNode.h + successorNode.g;
+					System.out.println("f: "+ successorNode.f);
 					openSet.add(successorNode);
 					
 				}
