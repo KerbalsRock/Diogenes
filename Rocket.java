@@ -1,12 +1,12 @@
 import bc.GameController;
 import bc.MapLocation;
-public class RocketManager extends BuildingManager{
+public class Rocket extends Building{
 
-	public RocketManager(GameController gc) {
+	public Rocket(GameController gc) {
 		super(gc);
 	}
 	
-	public RocketManager(GameController gc, int id) {
+	public Rocket(GameController gc, int id) {
 		super(gc, id);
 	}
 	

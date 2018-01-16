@@ -1,10 +1,10 @@
 import bc.GameController;
 import bc.MapLocation;
-public class RangerManager extends AttackUnitManager{
-		public RangerManager(GameController gc) {
+public class Ranger extends AttackUnit{
+		public Ranger(GameController gc) {
 			super(gc);
 		}
-		public RangerManager(GameController gc, int id ) {
+		public Ranger(GameController gc, int id ) {
 			super(gc, id);
 		}
 

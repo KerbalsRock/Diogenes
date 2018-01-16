@@ -1,10 +1,10 @@
 import bc.GameController;
-public class KnightManager extends AttackUnitManager{
+public class Knight extends AttackUnit{
 	//work
-	public KnightManager(GameController gc) {
+	public Knight(GameController gc) {
 		super(gc);
 	}
-	public KnightManager(GameController gc, int id ) {
+	public Knight(GameController gc, int id ) {
 		super(gc, id);
 	}
 	

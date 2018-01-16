@@ -1,11 +1,11 @@
 import bc.*;
-public class FactoryManager extends BuildingManager{
+public class Factory extends Building{
 
-	public FactoryManager(GameController gc) {
+	public Factory(GameController gc) {
 		super(gc);
 	}
 	
-	public FactoryManager(GameController gc, int id) {
+	public Factory(GameController gc, int id) {
 		super(gc, id);
 	}
 	

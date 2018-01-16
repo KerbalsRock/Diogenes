@@ -52,7 +52,7 @@ public class GameAnalyzer {
 			availableKarb += pl.initialKarboniteAt(mapLoc);
 		}
 		
-		earthScore = Math.pow(nodesToEnemy, 1)*Math.pow(availableKarb/startingIslandSize, 1)*Math.pow(startingWorkers, 1);
+		earthScore = Math.sqrt(Math.pow(nodesToEnemy, 1)*Math.pow(availableKarb/startingIslandSize, 1)*Math.pow(startingWorkers, 1));
 	}
 	
 	private void analyzeMars(){

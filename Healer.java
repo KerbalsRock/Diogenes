@@ -1,10 +1,10 @@
 import bc.GameController;
-public class HealerManager extends AttackUnitManager{
+public class Healer extends AttackUnit{
 
-	public HealerManager(GameController gc) {
+	public Healer(GameController gc) {
 		super(gc);
 	}
-	public HealerManager(GameController gc, int id ) {
+	public Healer(GameController gc, int id ) {
 		super(gc, id);
 	}
 	

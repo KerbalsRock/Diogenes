@@ -1,12 +1,12 @@
 import bc.*;
-public class Manager {
+public class GameObject {
 	protected GameController gc;
 	public int id;
 	
-	public Manager(GameController gc) {
+	public GameObject(GameController gc) {
 		this.gc = gc;
 	}
-	public Manager(GameController gc, int id) {
+	public GameObject(GameController gc, int id) {
 		this.gc = gc;
 		this.id = id;
 	}

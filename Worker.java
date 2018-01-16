@@ -1,9 +1,9 @@
 import bc.*;
-public class WorkerManager extends UnitManager{
-		public WorkerManager(GameController gc) {
+public class Worker extends BasicUnit{
+		public Worker(GameController gc) {
 			super(gc);
 		}
-		public WorkerManager(GameController gc, int id ) {
+		public Worker(GameController gc, int id ) {
 			super(gc, id);
 		}
 		

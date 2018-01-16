@@ -1,10 +1,10 @@
 import bc.*;
 
-public class UnitManager extends Manager{
-	public UnitManager(GameController gc) {
+public class BasicUnit extends GameObject{
+	public BasicUnit(GameController gc) {
 		super(gc);
 	}
-	public UnitManager(GameController gc, int id) {
+	public BasicUnit(GameController gc, int id) {
 		super(gc,id);
 	}
 	

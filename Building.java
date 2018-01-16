@@ -1,10 +1,10 @@
 import bc.*;
-public class BuildingManager extends Manager{
+public class Building extends GameObject{
 
-	public BuildingManager(GameController gc) {
+	public Building(GameController gc) {
 		super(gc);
 	}
-	public BuildingManager(GameController gc, int id) {
+	public Building(GameController gc, int id) {
 		super(gc, id);
 	}
 	

@@ -1,11 +1,11 @@
 import bc.GameController;
 
-public class AttackUnitManager extends UnitManager{
+public class AttackUnit extends BasicUnit{
 	
-	public AttackUnitManager(GameController gc) {
+	public AttackUnit(GameController gc) {
 		super(gc);
 	}
-	public AttackUnitManager(GameController gc, int id) {
+	public AttackUnit(GameController gc, int id) {
 		super(gc, id);
 	}
 	

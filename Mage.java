@@ -1,10 +1,10 @@
 import bc.GameController;
 import bc.MapLocation;
-public class MageManager extends AttackUnitManager{
-	public MageManager(GameController gc) {
+public class Mage extends AttackUnit{
+	public Mage(GameController gc) {
 		super(gc);
 	}
-	public MageManager(GameController gc, int id ) {
+	public Mage(GameController gc, int id ) {
 		super(gc, id);
 	}
 	
