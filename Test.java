@@ -5,14 +5,14 @@ import bc.*;
 public class Test {
 	public Test(){};
 	
-	public void testPathfinder(Island i, MapLocation startLoc, MapLocation endLoc) {
+	public void testPathfinder(Island i) {
 		PathFinder pathFinder = new PathFinder(i);
 		Path path;
 		int average = 0;
-		int iterations = 20;
+		int iterations = 25;
 		for(int j = 0; j < iterations; j++){
 			long beginMil = System.currentTimeMillis();
-			path = pathFinder.generatePath(startLoc, endLoc);
+			path = pathFinder.generatePath(i.list.get((int)(Math.random()*5)),i.list.get(i.list.size() - 1- (int)(Math.random()*5)));
 			long endMil = System.currentTimeMillis();
 			System.out.println(path.toString());
 			long mil = endMil-beginMil;

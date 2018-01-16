@@ -42,7 +42,7 @@ public class Player {
     
     // Connect to the manager, starting the game
    	GameController gc = new GameController();
-   	tester.testPathfinder(island1, list1.get((int)Math.random()*5), list1.get(list1.size()-1-(int)(Math.random()*5)));
+   	tester.testPathfinder(island1);
     while (true) {
  
         // Submit the actions we've done, and wait for our next turn.
