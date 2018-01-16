@@ -13,21 +13,21 @@ public class Player {
     list1.add(new MapLocation(Planet.Earth, 4, 0));
 
     list1.add(new MapLocation(Planet.Earth, 0, 1));
-    list1.add(new MapLocation(Planet.Earth, 1, 1));
-    list1.add(new MapLocation(Planet.Earth, 2, 1));
-    list1.add(new MapLocation(Planet.Earth, 3, 1));
+    //list1.add(new MapLocation(Planet.Earth, 1, 1));
+    //list1.add(new MapLocation(Planet.Earth, 2, 1));
+    //list1.add(new MapLocation(Planet.Earth, 3, 1));
     list1.add(new MapLocation(Planet.Earth, 4, 1));
     
     list1.add(new MapLocation(Planet.Earth, 0, 2));
-    list1.add(new MapLocation(Planet.Earth, 1, 2));
-    list1.add(new MapLocation(Planet.Earth, 2, 2));
-    list1.add(new MapLocation(Planet.Earth, 3, 2));
+    //list1.add(new MapLocation(Planet.Earth, 1, 2));
+    //list1.add(new MapLocation(Planet.Earth, 2, 2));
+    //list1.add(new MapLocation(Planet.Earth, 3, 2));
     list1.add(new MapLocation(Planet.Earth, 4, 2));
     
     list1.add(new MapLocation(Planet.Earth, 0, 3));
-    list1.add(new MapLocation(Planet.Earth, 1, 3));
-    list1.add(new MapLocation(Planet.Earth, 2, 3));
-    list1.add(new MapLocation(Planet.Earth, 3, 3));
+    //list1.add(new MapLocation(Planet.Earth, 1, 3));
+    //list1.add(new MapLocation(Planet.Earth, 2, 3));
+    //list1.add(new MapLocation(Planet.Earth, 3, 3));
     list1.add(new MapLocation(Planet.Earth, 4, 3));
     
     list1.add(new MapLocation(Planet.Earth, 0, 4));
@@ -42,7 +42,7 @@ public class Player {
     
     // Connect to the manager, starting the game
    	GameController gc = new GameController();
-   	tester.testPathfinder(island1);
+   	tester.testPathfinder(island1, list1.get((int)Math.random()*5), list1.get(list1.size()-1-(int)(Math.random()*5)));
     while (true) {
  
         // Submit the actions we've done, and wait for our next turn.

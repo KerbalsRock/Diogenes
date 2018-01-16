@@ -24,7 +24,7 @@ public class PathFinder {
 	}
 
 	public Path generatePath(MapLocation startLoc, MapLocation endLoc) {
-		if(!island.toString().contains(endLoc.toString())){
+		if(!island.list.contains(endLoc)){
 			return null;
 		}
 		AStarNode startNode = island.convertToHashMap().get(startLoc.toString());
