@@ -24,6 +24,9 @@ public class PathFinder {
 	}
 
 	public Path generatePath(MapLocation startLoc, MapLocation endLoc) {
+		if(!island.toString().contains(endLoc.toString())){
+			return null;
+		}
 		AStarNode startNode = island.convertToHashMap().get(startLoc.toString());
 		AStarNode endNode = island.convertToHashMap().get(endLoc.toString());
 		PriorityQueue<AStarNode> openSet = new PriorityQueue<AStarNode>(new NodeComparer());
