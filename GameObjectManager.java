@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import bc.*;
 
 public abstract class GameObjectManager {
-	protected ArrayList<GameObject> objects;
+	private ArrayList<GameObject> objects;
 	protected GameController gc;
 	public GameObjectManager(GameController gc, ArrayList<GameObject> objectList) {
 		this.gc = gc;
