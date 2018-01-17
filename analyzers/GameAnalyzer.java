@@ -1,6 +1,9 @@
+package analyzers;
 import java.util.ArrayList;
 
 import bc.*;
+import pathfinder.PathFinder;
+
 public class GameAnalyzer {
 	public GameController gc;
 	public PlanetAnalyzer earth;

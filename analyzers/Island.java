@@ -1,7 +1,9 @@
+package analyzers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import bc.*;
+import pathfinder.AStarNode;
 
 public class Island {
 	public ArrayList<MapLocation> list;

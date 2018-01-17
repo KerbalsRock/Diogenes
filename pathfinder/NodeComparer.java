@@ -1,3 +1,4 @@
+package pathfinder;
 import java.util.Comparator;
 
 public class NodeComparer implements Comparator<AStarNode>{

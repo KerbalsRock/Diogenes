@@ -1,8 +1,10 @@
+package pathfinder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
+import analyzers.Island;
 import bc.*;
 
 public class PathFinder {
