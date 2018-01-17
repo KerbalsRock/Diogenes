@@ -40,12 +40,66 @@ public class Worker extends BasicUnit{
 			return false;
 		}
 		
+		public boolean replicate(){
+			for(Direction d : Direction.values()){
+				if(replicate(d)){
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		public boolean harvest(Direction direction) {
 			if(gc.canHarvest(id, direction)){
 				gc.harvest(id, direction);
 				return true;
 			}
 			return false;
+		}
+		
+		public boolean harvestNearby(){
+			for(Direction d : Direction.values()){
+				if(harvest(d)){
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		public boolean harvestClosest(){
+			if(harvestNearby()){
+				return true;
+			}
+			return move(gc.unit(id).location().mapLocation().directionTo(closestKarbonite(2)));
+		}
+		
+		public MapLocation closestKarbonite(int layer){
+			MapLocation loc = gc.unit(id).location().mapLocation();
+			for(int i = -layer; i <= layer; i++){
+				MapLocation newloc = loc.translate(-layer, i);
+				if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+					return newloc;
+				}
+			}
+			for(int i = -layer; i <= layer; i++){
+				MapLocation newloc = loc.translate(layer, i);
+				if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+					return newloc;
+				}
+			}
+			for(int i = -layer+1; i < layer; i++){
+				MapLocation newloc = loc.translate(i, -layer);
+				if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+					return newloc;
+				}
+			}
+			for(int i = -layer+1; i < layer; i++){
+				MapLocation newloc = loc.translate(i, layer);
+				if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+					return newloc;
+				}
+			}
+			return closestKarbonite(layer+1);
 		}
 		
 
