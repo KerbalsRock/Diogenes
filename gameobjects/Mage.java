@@ -1,3 +1,4 @@
+package gameobjects;
 import bc.GameController;
 import bc.MapLocation;
 public class Mage extends AttackUnit{

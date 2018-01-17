@@ -1,9 +1,11 @@
+package player;
 // import the API.
 // See xxx for the javadocs.
 import java.util.ArrayList;
 
 import analyzers.GameAnalyzer;
 import bc.*;
+import gameobjects.Worker;
 
 public class Player {
     public static void main(String[] args) {

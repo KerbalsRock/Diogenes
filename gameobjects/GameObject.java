@@ -1,3 +1,4 @@
+package gameobjects;
 import bc.*;
 public class GameObject {
 	protected GameController gc;

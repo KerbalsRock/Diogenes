@@ -1,3 +1,4 @@
+package gameobjects;
 import bc.*;
 public class Factory extends Building{
 

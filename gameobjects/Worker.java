@@ -1,3 +1,4 @@
+package gameobjects;
 import bc.*;
 public class Worker extends BasicUnit{
 		public Worker(GameController gc) {

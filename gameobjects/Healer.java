@@ -1,3 +1,4 @@
+package gameobjects;
 import bc.GameController;
 public class Healer extends AttackUnit{
 
