@@ -21,4 +21,9 @@ public class WorkerManager extends BasicUnitManager {
 			worker.harvestClosest();
 		}
 	}
+	
+	public int getOptimalWorkers(){
+		//TODO make this
+		return 0;
+	}
 }

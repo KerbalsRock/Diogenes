@@ -13,10 +13,11 @@ public class GameAnalyzer {
 	public ArrayList<MapLocation> ourStart;
 	public ArrayList<MapLocation> enemyStart;
 	private int startingIslandSize;
-	private int nodesToEnemy;
+	private Integer nodesToEnemy;
 	private int startingWorkers;
 	private int availableKarb;
 	public double earthScore;
+	public double gameScore;
 	
 	
 	public GameAnalyzer(GameController gc){
@@ -50,12 +51,22 @@ public class GameAnalyzer {
 		PathFinder p = new PathFinder(earth.islands.get(0));
 		PlanetMap pl = new PlanetMap();
 		startingIslandSize = earth.islands.get(0).list.size();
-		nodesToEnemy = p.generatePath(ourStart.get(0), enemyStart.get(0)).locList.size();
 		for(MapLocation mapLoc : earth.islands.get(0).list) {
 			availableKarb += pl.initialKarboniteAt(mapLoc);
 		}
-		
-		earthScore = Math.sqrt(Math.pow(nodesToEnemy, 1)*Math.pow(availableKarb/startingIslandSize, 1)*Math.pow(startingWorkers, 1));
+		try{
+			nodesToEnemy = p.generatePath(ourStart.get(0), enemyStart.get(0)).locList.size();
+			earthScore = Math.sqrt(Math.pow(nodesToEnemy, 1)*Math.pow(availableKarb/startingIslandSize, 1)*Math.pow(startingWorkers, 1));
+		}
+		catch(Exception e){
+			nodesToEnemy = null;
+			earthScore = Math.sqrt(Math.pow(availableKarb/startingIslandSize, 1)*Math.pow(startingWorkers, 1));
+		}
+	}
+	
+	public void update(){
+		gameScore = Math.sqrt(Math.pow(gc.round(), 1)*Math.pow(gc.karbonite(), 1));
+		//TODO finish this
 	}
 	
 	private void analyzeMars(){
