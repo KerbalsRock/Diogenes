@@ -16,6 +16,15 @@ public class Worker extends BasicUnit{
 			return false;
 		}
 		
+		public boolean blueprint(UnitType type) {
+			for(Direction d : directions){
+				if(blueprint(type, d)){
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		public boolean build(int targetId) {
 			if(gc.canBuild(id, targetId)){
 				gc.build(id, targetId);
@@ -102,5 +111,15 @@ public class Worker extends BasicUnit{
 			return closestKarbonite(layer+1);
 		}
 		
+		public void update(){
+			switch(currentTask){
+			case 1: if(!load(targetId, id)){moveToward(gc.unit(id).location().mapLocation());}//load rocket if necessary
+			case 2: if(!build(targetId) && !repair(targetId)){moveToward(gc.unit(id).location().mapLocation());}//repair/build nearby buildings
+			case 3: blueprint(UnitType.Factory);//blueprint factory at nearby location
+			case 4: blueprint(UnitType.Rocket);//blueprint rocket at nearby location
+			case 5: harvestClosest();//this is super inefficient if its far away so if it starts causing problems fix it
+		}
+
+	}
 
 }

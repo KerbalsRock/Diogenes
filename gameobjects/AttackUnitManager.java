@@ -12,5 +12,13 @@ public class AttackUnitManager extends BasicUnitManager{
 			attackUnits.add((AttackUnit)o);
 		}
 	}
-
+	
+	public void update(){
+		for(AttackUnit u : attackUnits){
+			//assign tasks and targets, default to follow path>if in range of enemy, kite
+		}
+		for(AttackUnit u : attackUnits){
+			u.update();
+		}
+	}
 }
