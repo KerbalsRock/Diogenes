@@ -1,7 +1,10 @@
 package gameobjects;
 import bc.*;
+import pathfinder.Path;
 
 public class BasicUnit extends GameObject{
+	Path pathToEnemy;
+	int pathIndex = 0;
 	public BasicUnit(GameController gc) {
 		super(gc);
 	}
@@ -16,9 +19,9 @@ public class BasicUnit extends GameObject{
 		}
 		return false;
 	}
-	public boolean nextPathNode() {
-		//TODO make this work
-		return false;
+	public MapLocation nextPathNode() {
+		pathIndex++;
+		return pathToEnemy.locList.get(pathIndex-1);
 	}
 
 }
