@@ -1,6 +1,6 @@
 package gameobjects;
 import java.util.ArrayList;
-import bc.GameController;
+import bc.*;
 
 public class RangerManager extends AttackUnitManager {
 	public ArrayList<Ranger> rangers;
@@ -10,6 +10,10 @@ public class RangerManager extends AttackUnitManager {
 		for(GameObject o : unitList) {
 			rangers.add((Ranger)o);
 		}
+	}
+	
+	public void formConcave(MapLocation focus, int distance) {
+		
 	}
 
 }

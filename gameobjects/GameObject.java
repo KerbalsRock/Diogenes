@@ -3,6 +3,8 @@ import bc.*;
 public class GameObject {
 	protected GameController gc;
 	public int id;
+	public int currentTask;
+	public int targetId;
 	
 	public GameObject(GameController gc) {
 		this.gc = gc;
