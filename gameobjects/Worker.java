@@ -113,6 +113,7 @@ public class Worker extends BasicUnit{
 		
 		public void update(){
 			switch(currentTask){
+			case 0: followPath();//follow de way
 			case 1: if(!load(targetId, id)){moveToward(gc.unit(id).location().mapLocation());}//load rocket if necessary
 			case 2: if(!build(targetId) && !repair(targetId)){moveToward(gc.unit(id).location().mapLocation());}//repair/build nearby buildings
 			case 3: blueprint(UnitType.Factory);//blueprint factory at nearby location
