@@ -1,6 +1,8 @@
 package gameobjects;
 import bc.*;
 public class Worker extends BasicUnit{
+		
+	
 		public Worker(GameController gc) {
 			super(gc);
 		}
@@ -113,12 +115,37 @@ public class Worker extends BasicUnit{
 		
 		public void update(){
 			switch(currentTask){
-			case 0: followPath();//follow de way
-			case 1: if(!load(targetId, id)){moveToward(gc.unit(id).location().mapLocation());}//load rocket if necessary
-			case 2: if(!build(targetId) && !repair(targetId)){moveToward(gc.unit(id).location().mapLocation());}//repair/build nearby buildings
-			case 3: blueprint(UnitType.Factory);//blueprint factory at nearby location
-			case 4: blueprint(UnitType.Rocket);//blueprint rocket at nearby location
-			case 5: harvestClosest();//this is super inefficient if its far away so if it starts causing problems fix it
+			case 0:
+				followPath();//follow de way
+				harvestNearby();
+			case 1:
+				if(!load(targetId, id)){moveToward(gc.unit(id).location().mapLocation());}//load rocket if necessary
+			case 2:
+				if(!build(targetId) && !repair(targetId)){moveToward(gc.unit(id).location().mapLocation());}//repair/build nearby buildings
+			case 3:
+				blueprint(UnitType.Factory);//blueprint factory at nearby location
+			case 4:
+				blueprint(UnitType.Rocket);//blueprint rocket at nearby location
+			case 5:
+				int rand = (int)Math.random()*8;
+				if(rand == 0) {
+					move(Direction.North);
+				}else if(rand == 1) {
+					move(Direction.Northeast);
+				}else if(rand == 2) {
+					move(Direction.East);
+				}else if(rand == 3) {
+					move(Direction.Southeast);
+				}else if(rand == 4) {
+					move(Direction.South);
+				}else if(rand == 5) {
+					move(Direction.Southwest);
+				}else if(rand == 6) {
+					move(Direction.West);
+				}else if(rand == 7) {
+					move(Direction.Northwest);
+				}
+				harvestNearby();
 		}
 
 	}

@@ -14,13 +14,7 @@ public class WorkerManager extends BasicUnitManager {
 	
 	public void update(){
 		for(Worker worker : workerList){
-			//determine optimal number of workers, if less than that, replicate
-			//load into rocket if necessary (task num 1)
-			//repair/build nearby buildings (task num 2)
-			//determine optimal number of factories, if less, blueprint at closest available location
-			//if need rocket, blueprint at closest available location
-			//default posture is gather closest karbonite
-			worker.harvestClosest();
+			worker.update();
 		}
 	}
 	
