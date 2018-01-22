@@ -14,10 +14,16 @@ public class FactoryManager extends BuildingManager{
 			factories.add((Factory)o);
 		}
 	}
+	
+	
 	public void update() {
 		for(Factory f : factories) {
+			if(!gc.canSenseUnit(f.id)){
+				factories.remove(f);
+				continue;
+			}
 			f.makeUnit(UnitType.Ranger);
-			f.unload(Direction.Northwest);
+			f.unload();
 		}
 	}
 

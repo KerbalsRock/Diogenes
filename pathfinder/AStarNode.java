@@ -51,7 +51,7 @@ public class AStarNode {
 		f = 0;
 		hasParent = false;
 		parent = null;
-		parents.clear();;
+		parents.clear();
 	}
 	
 }

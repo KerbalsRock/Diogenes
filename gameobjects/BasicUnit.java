@@ -5,7 +5,6 @@ import pathfinder.Path;
 public class BasicUnit extends GameObject{
 	public Path pathToEnemy;
 	int pathIndex = 0;
-	Direction[] directions = new Direction[]{Direction.East, Direction.Northeast, Direction.North, Direction.Northwest, Direction.West, Direction.Southwest, Direction.South, Direction.Southeast};
 	int[] tryRotate = new int[]{0, 1, -1, 2, -2};
 	public BasicUnit(GameController gc) {
 		super(gc);
@@ -37,6 +36,16 @@ public class BasicUnit extends GameObject{
 	public boolean moveToward(Direction d){
 		for(int i : tryRotate){
 			if(move(rotate(d, i))){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean moveRandomly(){
+		int rand = (int)Math.random()*8;
+		for(int i = 0; i < directions.length; i++){
+			if(move(rotate(directions[rand], i))){
 				return true;
 			}
 		}

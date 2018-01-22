@@ -1,7 +1,7 @@
 package gameobjects;
 import bc.*;
 public class Worker extends BasicUnit{
-		
+		int currentTask = 5;
 	
 		public Worker(GameController gc) {
 			super(gc);
@@ -13,6 +13,8 @@ public class Worker extends BasicUnit{
 		public boolean blueprint(UnitType type, Direction direction) {
 			if(gc.canBlueprint(id, type, direction)){
 				gc.blueprint(id, type, direction);
+				currentTask = 2;
+				targetId = getClosestFactoryBlueprint();
 				return true;
 			}
 			return false;
@@ -113,6 +115,22 @@ public class Worker extends BasicUnit{
 			return closestKarbonite(layer+1);
 		}
 		
+		public int getClosestFactoryBlueprint(){
+			Unit self = gc.unit(id);
+			int closestId = -1;
+			MapLocation myLocation = self.location().mapLocation();
+			VecUnit nearbyBlueprints = gc.senseNearbyUnitsByType(myLocation, 8, UnitType.Factory);
+			int closestDistance = 1000000;
+			for(int i = 0; i < nearbyBlueprints.size(); i++){
+				int enemyDistance = (int) nearbyBlueprints.get(i).location().mapLocation().distanceSquaredTo(myLocation);
+				if(enemyDistance < closestDistance && nearbyBlueprints.get(i).structureIsBuilt() == 0){
+					closestDistance = enemyDistance;
+					closestId = nearbyBlueprints.get(i).id();
+				}
+			}
+			return closestId;
+		}
+		
 		public void update(){
 			switch(currentTask){
 			case 0:
@@ -127,25 +145,10 @@ public class Worker extends BasicUnit{
 			case 4:
 				blueprint(UnitType.Rocket);//blueprint rocket at nearby location
 			case 5:
-				int rand = (int)Math.random()*8;
-				if(rand == 0) {
-					move(Direction.North);
-				}else if(rand == 1) {
-					move(Direction.Northeast);
-				}else if(rand == 2) {
-					move(Direction.East);
-				}else if(rand == 3) {
-					move(Direction.Southeast);
-				}else if(rand == 4) {
-					move(Direction.South);
-				}else if(rand == 5) {
-					move(Direction.Southwest);
-				}else if(rand == 6) {
-					move(Direction.West);
-				}else if(rand == 7) {
-					move(Direction.Northwest);
+				if(!harvestNearby()){
+					moveRandomly();
+					harvestNearby();
 				}
-				harvestNearby();
 		}
 
 	}

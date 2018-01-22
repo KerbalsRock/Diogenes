@@ -25,5 +25,14 @@ public class Building extends GameObject{
 		return false;
 	}
 	
+	public boolean unload(){
+		for(Direction d : directions){
+			if(unload(d)){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 
 }

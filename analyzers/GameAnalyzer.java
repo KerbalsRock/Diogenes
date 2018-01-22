@@ -2,6 +2,7 @@ package analyzers;
 import java.util.ArrayList;
 
 import bc.*;
+import pathfinder.Path;
 import pathfinder.PathFinder;
 
 public class GameAnalyzer {
@@ -12,6 +13,7 @@ public class GameAnalyzer {
 	public AsteroidPattern asteroids;
 	public ArrayList<MapLocation> ourStart;
 	public ArrayList<MapLocation> enemyStart;
+	public Path pathToEnemy;
 	private int startingIslandSize;
 	private Integer nodesToEnemy;
 	private int startingWorkers;
@@ -54,8 +56,9 @@ public class GameAnalyzer {
 		for(MapLocation mapLoc : earth.islands.get(0).list) {
 			availableKarb += pl.initialKarboniteAt(mapLoc);
 		}
+		pathToEnemy = p.generatePath(ourStart.get(0), enemyStart.get(0));
 		try{
-			nodesToEnemy = p.generatePath(ourStart.get(0), enemyStart.get(0)).locList.size();
+			nodesToEnemy = pathToEnemy.locList.size();
 			earthScore = Math.sqrt(Math.pow(nodesToEnemy, 1)*Math.pow(availableKarb/startingIslandSize, 1)*Math.pow(startingWorkers, 1));
 		}
 		catch(Exception e){
