@@ -24,8 +24,8 @@ public class GameAnalyzer {
 	
 	public GameAnalyzer(GameController gc){
 		this.gc = gc;
-		findStartingLocs();
 		earth = new PlanetAnalyzer(gc, gc.startingMap(Planet.Earth));
+		findStartingLocs();
 		earth.makeIslands(ourStart.get(0));
 		mars = new PlanetAnalyzer(gc, gc.startingMap(Planet.Mars));
 		mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));
@@ -38,15 +38,12 @@ public class GameAnalyzer {
 	}
 	
 	private void findStartingLocs(){
-		for(int i = 0; i < earth.p.getInitial_units().size(); i++){
-			Unit u = earth.p.getInitial_units().get(i);
-			if(u.team() == gc.team()){
-				ourStart.add(u.location().mapLocation());
-				//inverted from ourStart
-				enemyStart.add(new MapLocation(Planet.Earth, Math.abs((int)earth.p.getWidth()-u.location().mapLocation().getX()), Math.abs((int)earth.p.getHeight()-u.location().mapLocation().getY())));
-			}
-		}
-
+		for(int i = 0; i < gc.myUnits().size(); i++) {
+			Unit u = gc.myUnits().get(i);
+			ourStart.add(u.location().mapLocation());
+			//inverted from ourStart
+			enemyStart.add(new MapLocation(Planet.Earth, Math.abs((int)earth.p.getWidth()-u.location().mapLocation().getX()), Math.abs((int)earth.p.getHeight()-u.location().mapLocation().getY())));
+		}	
 	}
 	
 	private void analyzeEarth(){
