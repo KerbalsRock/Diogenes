@@ -1,4 +1,6 @@
 package gameobjects;
+import java.util.ArrayList;
+
 import bc.*;
 public class GameObject {
 	protected GameController gc;
@@ -19,5 +21,15 @@ public class GameObject {
 			return Team.Red;
 		}
 		return Team.Blue;
+	}
+	
+	public ArrayList<MapLocation> getAdjacent(MapLocation loc){
+		ArrayList<MapLocation> adjacent = new ArrayList<MapLocation>();
+		for(Direction d : Direction.values()){
+			if(gc.startingMap(gc.planet()).onMap(loc.add(d)) && d != Direction.Center){
+				adjacent.add(loc.add(d));
+			}
+		}
+		return adjacent;
 	}
 }

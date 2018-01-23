@@ -15,7 +15,6 @@ public class BasicUnit extends GameObject{
 	
 	public Direction rotate(Direction d, int amount){
 		int index = java.util.Arrays.asList(directions).indexOf(d);
-		System.out.println("direction :"+d+", index: "+index);
 		if(index+amount < 0){
 			index+=8;
 		}
@@ -69,6 +68,11 @@ public class BasicUnit extends GameObject{
 	}
 	
 	public boolean followPath() {
+		System.out.println("pathToEnemy :"+pathToEnemy);
+		System.out.println("pathIndex :"+pathIndex);
+		if(gc.unit(id).location().mapLocation().distanceSquaredTo(pathToEnemy.locList.get(pathIndex)) <= 2 && pathIndex < pathToEnemy.locList.size()-1){
+			pathIndex++;
+		}
 		return moveToward(pathToEnemy.locList.get(pathIndex));
 	}
 

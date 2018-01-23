@@ -28,6 +28,9 @@ public class GameAnalyzer {
 		earth = new PlanetAnalyzer(gc, gc.startingMap(Planet.Earth));
 		findStartingLocs();
 		earth.makeIslands(ourStart.get(0));
+		//System.out.println("island 0: "+earth.islands.get(0).list);
+		System.out.println("our start: "+ourStart);
+		System.out.println("enemy start: "+enemyStart);
 		if(gc.planet().equals(Planet.Mars)){
 			mars = new PlanetAnalyzer(gc, gc.startingMap(Planet.Mars));
 			mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));

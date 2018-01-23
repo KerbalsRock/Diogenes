@@ -23,7 +23,7 @@ public class Player {
    	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
    	AttackUnitManager attackManager = new AttackUnitManager(gc, new ArrayList<GameObject>(), analyzer);
    	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>());
-   	
+   	System.out.println("path to enemy :"+analyzer.pathToEnemy);
    	double earthScore = analyzer.earthScore;
    	double economyScore = 0;
    	double militaryScore = 0;
@@ -42,7 +42,6 @@ public class Player {
     			}
     			else if(u.unitType().equals(UnitType.Worker)){
     				workerManager.add(new Worker(gc, id));
-    				System.out.println("added to workers");
     			}
     			else if(u.unitType().equals(UnitType.Ranger)){
     				attackManager.add(new Ranger(gc, id));

@@ -32,12 +32,12 @@ public class AttackUnitManager extends BasicUnitManager{
 			//assign tasks and targets, default to follow path>if in range of enemy, kite
 			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth)){
 				u.pathToEnemy = ga.pathToEnemy;
-				u.currentTask = 1;
+				u.currentTask = 0;
 				u.hasFollowedPath = true;
 				continue;
 			}
 			//if it's following a path and an enemy enters vision, enter the chosen attack stance, kite for now
-			if(u.currentTask == 1 && u.getClosestEnemy() != 0){
+			if(u.currentTask == 0 && u.getClosestEnemy() != 0){
 				u.currentTask = 3;
 			}
 		}
