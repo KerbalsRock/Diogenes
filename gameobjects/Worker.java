@@ -137,13 +137,21 @@ public class Worker extends BasicUnit{
 				followPath();//follow de way
 				harvestNearby();
 			case 1:
-				if(!load(targetId, id)){moveToward(gc.unit(id).location().mapLocation());}//load rocket if necessary
+				if(!load(targetId, id)){
+					moveToward(gc.unit(id).location().mapLocation());
+				 }//load rocket if necessary
 			case 2:
-				if(!build(targetId) && !repair(targetId)){moveToward(gc.unit(id).location().mapLocation());}//repair/build nearby buildings
+				if(gc.unit(targetId).health()==gc.unit(targetId).maxHealth()) {
+					currentTask = 5;
+					break;
+				}
+				if(!build(targetId) && !repair(targetId)){
+					moveToward(gc.unit(id).location().mapLocation());
+				}//repair/build nearby buildings
 			case 3:
-				blueprint(UnitType.Factory);//blueprint factory at nearby location
+				blueprint(UnitType.Factory);
 			case 4:
-				blueprint(UnitType.Rocket);//blueprint rocket at nearby location
+				blueprint(UnitType.Rocket);
 			case 5:
 				if(!harvestNearby()){
 					moveRandomly();

@@ -5,7 +5,7 @@ import bc.*;
 public class WorkerManager extends BasicUnitManager {
 	public ArrayList<Worker> workerList;
 	public boolean factoryNeed;
-	public int optimalWorkers = 10;
+	public int optimalWorkers = 5;
 	public WorkerManager(GameController gc, ArrayList<GameObject> objectList) {
 		super(gc, objectList);
 		workerList = new ArrayList<Worker>();
