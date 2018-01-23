@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import analyzers.GameAnalyzer;
 import bc.GameController;
 import bc.Planet;
+import bc.Team;
+import bc.UnitType;
 
 public class AttackUnitManager extends BasicUnitManager{
 	private ArrayList<AttackUnit> attackUnits;
@@ -38,7 +40,12 @@ public class AttackUnitManager extends BasicUnitManager{
 			}
 			//if it's following a path and an enemy enters vision, enter the chosen attack stance, kite for now
 			if(u.currentTask == 0 && u.getClosestEnemy() != 0){
-				u.currentTask = 3;
+				if(gc.unit(u.id).unitType().equals(UnitType.Ranger)){
+					u.currentTask = 3;
+				}
+				else{
+					u.currentTask = 2;
+				}
 			}
 		}
 		for(AttackUnit u : attackUnits){
