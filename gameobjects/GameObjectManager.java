@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import bc.*;
 
 public abstract class GameObjectManager {
-	private ArrayList<GameObject> objects;
+	protected ArrayList<GameObject> objects;
 	protected GameController gc;
 	public GameObjectManager(GameController gc, ArrayList<GameObject> objectList) {
 		this.gc = gc;

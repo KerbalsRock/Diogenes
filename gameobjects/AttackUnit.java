@@ -25,8 +25,17 @@ public class AttackUnit extends BasicUnit{
 	
 	public void update(){
 		//target id is closest enemy, at least for now.
+		if(!gc.canSenseUnit(targetId)){
+			getClosestEnemy();
+		}
 		//attack manager assigns targets, then updates. check for attacking if able before and after moves.
 		attack(targetId);
+		if(!gc.canSenseUnit(targetId)){
+			getClosestEnemy();
+		}
+		if(!gc.canSenseUnit(targetId)){
+			return;
+		}
 		switch(currentTask){
 			case 0: followPath();//follow de way
 			case 1: //hold position, literally nothing goes here

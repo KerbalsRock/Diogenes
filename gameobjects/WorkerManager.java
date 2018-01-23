@@ -17,9 +17,14 @@ public class WorkerManager extends BasicUnitManager {
 	public void update(){
 		getFactoryNeed();
 		int workersThisTurn = 0;
-		for(Worker worker : workerList){
+		for(int i = 0; i < workerList.size(); i++){
+			Worker worker = workerList.get(i);
 			if(!gc.canSenseUnit(worker.id)){
 				workerList.remove(worker);
+				i--;
+				continue;
+			}
+			if(gc.unit(worker.id).location().isInGarrison()){
 				continue;
 			}
 			if(workerList.size()+workersThisTurn < optimalWorkers){
@@ -43,8 +48,18 @@ public class WorkerManager extends BasicUnitManager {
 			}
 		}
 		for(Worker worker : workerList){
+			if(gc.unit(worker.id).location().isInGarrison()){
+				continue;
+			}
 			worker.update();
 		}
+	}
+	
+	public void add(Worker worker) {
+		workerList.add(worker);
+	}
+	public void remove(Worker worker) {
+		workerList.remove(worker);
 	}
 	
 	public int getOptimalWorkers(){

@@ -17,14 +17,23 @@ public class FactoryManager extends BuildingManager{
 	
 	
 	public void update() {
-		for(Factory f : factories) {
+		for(int i = 0; i < factories.size(); i++){
+			Factory f = factories.get(i);
 			if(!gc.canSenseUnit(f.id)){
 				factories.remove(f);
+				i--;
 				continue;
 			}
 			f.makeUnit(UnitType.Ranger);
 			f.unload();
 		}
+	}
+	
+	public void add(Factory f) {
+		factories.add(f);
+	}
+	public void remove(Factory f) {
+		factories.remove(f);
 	}
 
 }

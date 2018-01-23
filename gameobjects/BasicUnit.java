@@ -14,7 +14,12 @@ public class BasicUnit extends GameObject{
 	}
 	
 	public Direction rotate(Direction d, int amount){
-		return directions[(java.util.Arrays.asList(directions).indexOf(d))%8];
+		int index = java.util.Arrays.asList(directions).indexOf(d);
+		System.out.println("direction :"+d+", index: "+index);
+		if(index+amount < 0){
+			index+=8;
+		}
+		return directions[(index+amount)%8];
 	}
 	
 	public boolean move(Direction d) {
@@ -53,7 +58,14 @@ public class BasicUnit extends GameObject{
 	}
 	
 	public boolean moveToward(MapLocation loc){
-		return moveToward(gc.unit(id).location().mapLocation().directionTo(loc));
+		Direction d = gc.unit(id).location().mapLocation().directionTo(loc);
+		if(d.equals(Direction.Center)){
+			return false;
+		}
+		else{
+			System.out.println(d);
+			return moveToward(d);
+		}
 	}
 	
 	public boolean followPath() {

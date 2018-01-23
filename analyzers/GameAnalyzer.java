@@ -1,5 +1,6 @@
 package analyzers;
 import java.util.ArrayList;
+import java.util.Random;
 
 import bc.*;
 import pathfinder.Path;
@@ -27,28 +28,43 @@ public class GameAnalyzer {
 		earth = new PlanetAnalyzer(gc, gc.startingMap(Planet.Earth));
 		findStartingLocs();
 		earth.makeIslands(ourStart.get(0));
-		mars = new PlanetAnalyzer(gc, gc.startingMap(Planet.Mars));
-		mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));
+		if(gc.planet().equals(Planet.Mars)){
+			mars = new PlanetAnalyzer(gc, gc.startingMap(Planet.Mars));
+			mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));
+		}
 		orbit = gc.orbitPattern();
 		asteroids = gc.asteroidPattern();
 		availableKarb = 0;
-		analyzeEarth();
+		if(gc.planet().equals(Planet.Earth)){
+			analyzeEarth();
+		}
 		analyzeMars();
 		analyzeOrbit();
 	}
 	
 	private void findStartingLocs(){
+		ourStart = new ArrayList<MapLocation>();
+		enemyStart = new ArrayList<MapLocation>();
 		for(int i = 0; i < gc.myUnits().size(); i++) {
 			Unit u = gc.myUnits().get(i);
 			ourStart.add(u.location().mapLocation());
 			//inverted from ourStart
 			enemyStart.add(new MapLocation(Planet.Earth, Math.abs((int)earth.p.getWidth()-u.location().mapLocation().getX()), Math.abs((int)earth.p.getHeight()-u.location().mapLocation().getY())));
 		}	
+		if(ourStart.isEmpty()){
+			MapLocation initial = new MapLocation(Planet.Mars, 0, 0);
+			PlanetMap p = gc.startingMap(Planet.Mars);
+			while(p.isPassableTerrainAt(initial) == 0){
+				Random r = new Random();
+				initial = new MapLocation(p.getPlanet(), r.nextInt((int)p.getWidth()), r.nextInt((int)p.getHeight()));
+			}
+			ourStart.add(initial);
+		}
 	}
 	
 	private void analyzeEarth(){
 		PathFinder p = new PathFinder(earth.islands.get(0));
-		PlanetMap pl = new PlanetMap();
+		PlanetMap pl = gc.startingMap(Planet.Earth);
 		startingIslandSize = earth.islands.get(0).list.size();
 		for(MapLocation mapLoc : earth.islands.get(0).list) {
 			availableKarb += pl.initialKarboniteAt(mapLoc);

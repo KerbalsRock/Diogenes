@@ -31,50 +31,58 @@ public class PlanetAnalyzer {
 		//probably do breadth first search from ourStart and move all found passable locations from unexplored
 		//to section 1, and all found impassable locations to impassable, then iterate through unexplored and
 		//add all impassable to impassable and start a new bfs at any new passable location and repeat
-		while(p.isPassableTerrainAt(initial) == 0){
-			Random r = new Random();
-			initial = new MapLocation(p.getPlanet(), r.nextInt((int)p.getWidth()), r.nextInt((int)p.getHeight()));
-		}
+		System.out.println("initial :"+initial);
 		ArrayList<MapLocation> unexplored = new ArrayList<MapLocation>();
 		for(int i = 0; i < p.getWidth(); i++){
 			for(int j = 0; j < p.getHeight(); j++){
 				unexplored.add(new MapLocation(p.getPlanet(), i, j));
 			}
 		}
+		//System.out.println("unexplored :"+unexplored);
+		islands = new ArrayList<Island>();
+		impassable = new ArrayList<MapLocation>();
 		while(!unexplored.isEmpty()){
 			ArrayList<MapLocation> open = new ArrayList<MapLocation>();
 			ArrayList<MapLocation> closed = new ArrayList<MapLocation>();
 			open.add(initial);
 			unexplored.remove(initial);
 			while(!open.isEmpty()){
-				for(MapLocation loc : open){
-					open.remove(loc);
-					for(MapLocation newloc : getAdjacent(loc)){
-						if(unexplored.contains(newloc)){
-							unexplored.remove(newloc);
-							if(p.isPassableTerrainAt(newloc) == 1){
-								open.add(newloc);
-							}
-							else{
-								impassable.add(newloc);
-							}
+				MapLocation loc = open.get(0);
+				//System.out.println("opening :"+loc);
+				open.remove(loc);
+				//System.out.println("open :"+open);
+				for(MapLocation newloc : getAdjacent(loc)){
+					//System.out.println("newloc :"+newloc);
+					boolean contains = false;
+					MapLocation otherLoc = null;
+					for(int i = 0; i < unexplored.size(); i++){
+						if(unexplored.get(i).toString().equals(newloc.toString())){
+							contains = true;
+							otherLoc = unexplored.get(i);
+							//System.out.println("otherloc :"+otherLoc);
 						}
 					}
-					closed.add(loc);
+					if(contains){
+						unexplored.remove(otherLoc);
+						if(p.isPassableTerrainAt(newloc) == 1){
+							open.add(newloc);
+						}
+						else{
+							impassable.add(newloc);
+						}
+					}
 				}
+				closed.add(loc);
 			}
 			islands.add(new Island(closed));
-			for(MapLocation loc : unexplored){
-				unexplored.remove(loc);
-				if(p.isPassableTerrainAt(loc) == 1){
-					initial = loc;
-					open.clear();
-					closed.clear();
-					break;
-				}
-				else{
-					impassable.add(loc);
-				}
+			while(!unexplored.isEmpty() && p.isPassableTerrainAt(unexplored.get(0)) == 0){
+				impassable.add(unexplored.get(0));
+				unexplored.remove(0);
+			}
+			if(!unexplored.isEmpty()){
+				initial = unexplored.get(0);
+				open.clear();
+				closed.clear();
 			}
 		}
 	}
