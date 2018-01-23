@@ -27,7 +27,6 @@ public class Player {
    	double earthScore = analyzer.earthScore;
    	double economyScore = 0;
    	double militaryScore = 0;
-   	int idealWorkerCount = 5;
    	ArrayList<Integer> processedIds = new ArrayList<Integer>();
     while (true) {
 	    	VecUnit myUnits = gc.myUnits();
@@ -53,7 +52,7 @@ public class Player {
 	    			}
 	    		}
 	    	}
-	    	workerManager.update(idealWorkerCount);
+	    	workerManager.update();
 	    	attackManager.update();
 	    	factoryManager.update();
         gc.nextTurn();
