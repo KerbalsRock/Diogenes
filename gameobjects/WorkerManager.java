@@ -36,13 +36,6 @@ public class WorkerManager extends BasicUnitManager {
 				worker.currentTask = 3;
 				factoryNeed = false;
 			}
-			else if(worker.currentTask == 5){
-				int closestId = worker.getClosestFactoryBlueprint();
-				if(closestId != -1){
-					worker.targetId = closestId;
-					worker.currentTask = 2;
-				}
-			}
 			else if(worker.currentTask == 2 && worker.getClosestFactoryBlueprint() == -1){
 				worker.currentTask = 5;
 			}
@@ -71,5 +64,30 @@ public class WorkerManager extends BasicUnitManager {
 		if(gc.karbonite() > 100){
 			factoryNeed = true;
 		}
+	}
+	
+	public ArrayList<Worker> findNearestUnitsTo(MapLocation loc, int numberOfUnits) {
+		ArrayList<Worker> list = new ArrayList<Worker>();
+		ArrayList<Integer> usedIndexes = new ArrayList<Integer>();
+		if(numberOfUnits > workerList.size()) {
+			numberOfUnits = workerList.size();
+		}
+		while(list.size()<numberOfUnits) {
+			long closestDistance = 100000;
+			int index = -1;
+			for(int i = 0; i < workerList.size(); i++) {
+				if(usedIndexes.contains(i)) {
+					continue;
+				}
+				long currentDistance =  gc.unit(workerList.get(i).id).location().mapLocation().distanceSquaredTo(loc);
+				if(currentDistance < closestDistance){
+					closestDistance = currentDistance;
+					index = i;
+				}
+			}
+			list.add(workerList.get(index));
+			usedIndexes.add(index);
+		}
+		return list;
 	}
 }

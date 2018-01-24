@@ -1,6 +1,7 @@
 package gameobjects;
 import java.util.ArrayList;
 import bc.GameController;
+import bc.MapLocation;
 
 public abstract class BasicUnitManager extends GameObjectManager {
 	
@@ -13,5 +14,5 @@ public abstract class BasicUnitManager extends GameObjectManager {
 			units.add((BasicUnit)o);
 		}
 	}
-
+	
 }

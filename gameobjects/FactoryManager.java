@@ -8,8 +8,10 @@ import bc.UnitType;
 
 public class FactoryManager extends BuildingManager{
 	public ArrayList<Factory> factories;
-	public FactoryManager(GameController gc, ArrayList<GameObject> objectList) {
+	private WorkerManager workerManager;
+	public FactoryManager(GameController gc, ArrayList<GameObject> objectList, WorkerManager workerManager) {
 		super(gc, objectList);
+		this.workerManager = workerManager;
 		factories = new ArrayList<Factory>();
 		for(GameObject o : objectList) {
 			factories.add((Factory)o);
@@ -24,6 +26,13 @@ public class FactoryManager extends BuildingManager{
 				factories.remove(f);
 				i--;
 				continue;
+			}
+			if(gc.unit(f.id).health() < gc.unit(f.id).maxHealth()) {
+				ArrayList<Worker> assignedWorkers = workerManager.findNearestUnitsTo(gc.unit(f.id).location().mapLocation(), 4);
+				for(Worker w : assignedWorkers) {
+					w.targetId = f.id;
+					w.currentTask = 2;
+				}
 			}
 			f.makeUnit(UnitType.Ranger);
 			f.unload();
