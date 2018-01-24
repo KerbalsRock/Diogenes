@@ -52,7 +52,7 @@ public class GameAnalyzer {
 			Unit u = gc.myUnits().get(i);
 			ourStart.add(u.location().mapLocation());
 			//inverted from ourStart
-			enemyStart.add(new MapLocation(Planet.Earth, Math.abs((int)earth.p.getWidth()-u.location().mapLocation().getX()), Math.abs((int)earth.p.getHeight()-u.location().mapLocation().getY())));
+			enemyStart.add(new MapLocation(Planet.Earth, Math.abs((int)earth.p.getWidth()-1-u.location().mapLocation().getX()), Math.abs((int)earth.p.getHeight()-1-u.location().mapLocation().getY())));
 		}	
 		if(ourStart.isEmpty()){
 			MapLocation initial = new MapLocation(Planet.Mars, 0, 0);

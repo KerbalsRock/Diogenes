@@ -62,14 +62,11 @@ public class BasicUnit extends GameObject{
 			return false;
 		}
 		else{
-			System.out.println(d);
 			return moveToward(d);
 		}
 	}
 	
 	public boolean followPath() {
-		System.out.println("pathToEnemy :"+pathToEnemy);
-		System.out.println("pathIndex :"+pathIndex);
 		if(gc.unit(id).location().mapLocation().distanceSquaredTo(pathToEnemy.locList.get(pathIndex)) <= 2 && pathIndex < pathToEnemy.locList.size()-1){
 			pathIndex++;
 		}

@@ -82,7 +82,7 @@ public class PlanetAnalyzer {
 			if(!unexplored.isEmpty()){
 				initial = unexplored.get(0);
 				open.clear();
-				closed.clear();
+				closed = new ArrayList<MapLocation>();
 			}
 		}
 	}

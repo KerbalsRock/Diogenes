@@ -17,18 +17,27 @@ import gameobjects.WorkerManager;
 public class Player {
     public static void main(String[] args) {
     // Connect to the manager, starting the game
-
    	GameController gc = new GameController();
-   	GameAnalyzer analyzer = new GameAnalyzer(gc);
-   	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
-   	AttackUnitManager attackManager = new AttackUnitManager(gc, new ArrayList<GameObject>(), analyzer);
-   	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>());
+   	while(gc.planet().equals(Planet.Mars)){
+   		gc.nextTurn();
+   	}
+   	WorkerManager workerManager;
+   	AttackUnitManager attackManager;
+   	FactoryManager factoryManager;
+	GameAnalyzer analyzer = new GameAnalyzer(gc);
+   	workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
+   	attackManager = new AttackUnitManager(gc, new ArrayList<GameObject>(), analyzer);
+   	factoryManager = new FactoryManager(gc, new ArrayList<GameObject>());
    	System.out.println("path to enemy :"+analyzer.pathToEnemy);
    	double earthScore = analyzer.earthScore;
    	double economyScore = 0;
    	double militaryScore = 0;
    	ArrayList<Integer> processedIds = new ArrayList<Integer>();
+
     while (true) {
+    	if(gc.planet().equals(Planet.Mars)){
+    		gc.nextTurn();
+    	}
     	System.out.println(gc.getTimeLeftMs());
     	VecUnit myUnits = gc.myUnits();
     	//System.out.println("my units :"+myUnits);

@@ -1,6 +1,7 @@
 package pathfinder;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
@@ -61,7 +62,7 @@ public class PathFinder {
 					successorNode.h = Math.max(Math.abs(successorNode.mapLoc.getX() - endNode.mapLoc.getX()),
 							Math.abs(successorNode.mapLoc.getY() - endNode.mapLoc.getY()));
 					successorNode.f = successorNode.h + successorNode.g;
-					System.out.println("f: "+ successorNode.f);
+					//System.out.println("f: "+ successorNode.f);
 					openSet.add(successorNode);
 					
 				}
@@ -79,6 +80,7 @@ public class PathFinder {
 		for(AStarNode a : closedSet) {
 			a.clear();
 		}
+		Collections.reverse(locList);
 		return new Path(locList);
 	}
 

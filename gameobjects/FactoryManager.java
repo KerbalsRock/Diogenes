@@ -26,19 +26,7 @@ public class FactoryManager extends BuildingManager{
 				i--;
 				continue;
 			}
-			if(gc.team().equals(Team.Blue)){
-				if(produceRangerLast){
-					f.makeUnit(UnitType.Knight);
-					produceRangerLast = false;
-				}
-				else{
-					f.makeUnit(UnitType.Ranger);
-					produceRangerLast = true;
-				}
-			}
-			else{
-				f.makeUnit(UnitType.Knight);
-			}
+			f.makeUnit(UnitType.Ranger);
 			f.unload();
 		}
 	}
