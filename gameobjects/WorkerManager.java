@@ -27,17 +27,14 @@ public class WorkerManager extends BasicUnitManager {
 			if(gc.unit(worker.id).location().isInGarrison()){
 				continue;
 			}
-			if(workerList.size()+workersThisTurn < optimalWorkers){
-				if(worker.replicate()){
-					workersThisTurn++;
-				}
-			}
-			else if(factoryNeed && worker.currentTask == 5){
+			if(factoryNeed && worker.currentTask == 5){
 				worker.currentTask = 3;
 				factoryNeed = false;
 			}
-			else if(worker.currentTask == 2 && worker.getClosestFactoryBlueprint() == -1){
-				worker.currentTask = 5;
+			else if(workerList.size()+workersThisTurn < optimalWorkers){
+				if(worker.replicate()){
+					workersThisTurn++;
+				}
 			}
 		}
 		for(Worker worker : workerList){

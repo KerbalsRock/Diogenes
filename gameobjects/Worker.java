@@ -138,26 +138,23 @@ public class Worker extends BasicUnit{
 			followPath();//follow de way
 			harvestNearby();
 		case 1:
+			if(!gc.canSenseUnit(gc.unit(targetId).id())) {
+				currentTask = 5;
+			}
 			if(!load(targetId, id)){
 				moveToward(gc.unit(id).location().mapLocation());
 			 }//load rocket if necessary
 		case 2:
-			if(!gc.canSenseUnit(targetId)){
-				int id = getClosestFactoryBlueprint();
-				if(id == -1){
-					currentTask = 5;
-					update();
-					break;
-				}
-			}
-			else if(gc.unit(targetId).health()==gc.unit(targetId).maxHealth()) {
+			if(!gc.canSenseUnit(gc.unit(targetId).id())) {
 				currentTask = 5;
-				update();
-				break;
 			}
-			else if(!build(targetId) && !repair(targetId)){
+			if(gc.unit(targetId).health()==gc.unit(targetId).maxHealth()) {
+				currentTask = 5;
+				return;
+			}
+			else if(!repair(targetId) && !build(targetId)){
 				moveToward(gc.unit(targetId).location().mapLocation());
-			}//repair/build nearby buildings
+			}
 		case 3:
 			blueprint(UnitType.Factory);
 		case 4:
