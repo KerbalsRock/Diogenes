@@ -11,6 +11,7 @@ import gameobjects.GameObject;
 import gameobjects.Knight;
 import gameobjects.Mage;
 import gameobjects.Ranger;
+import gameobjects.RangerManager;
 import gameobjects.Worker;
 import gameobjects.WorkerManager;
 
@@ -21,13 +22,10 @@ public class Player {
    	while(gc.planet().equals(Planet.Mars)){
    		gc.nextTurn();
    	}
-   	WorkerManager workerManager;
-   	AttackUnitManager attackManager;
-   	FactoryManager factoryManager;
 	GameAnalyzer analyzer = new GameAnalyzer(gc);
-   	workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
-   	attackManager = new AttackUnitManager(gc, new ArrayList<GameObject>(), analyzer);
-   	factoryManager = new FactoryManager(gc, new ArrayList<GameObject>());
+   	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
+   	RangerManager rangerManager = new RangerManager(gc, new ArrayList<GameObject>(), analyzer);
+   	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>());
    	System.out.println("path to enemy :"+analyzer.pathToEnemy);
    	double earthScore = analyzer.earthScore;
    	double economyScore = 0;
@@ -53,13 +51,7 @@ public class Player {
     				workerManager.add(new Worker(gc, id));
     			}
     			else if(u.unitType().equals(UnitType.Ranger)){
-    				attackManager.add(new Ranger(gc, id));
-    			}
-    			else if(u.unitType().equals(UnitType.Knight)){
-    				attackManager.add(new Knight(gc, id));
-    			}
-    			else if(u.unitType().equals(UnitType.Mage)){
-    				attackManager.add(new Mage(gc, id));
+    				rangerManager.add(new Ranger(gc, id));
     			}
     		}
     	}

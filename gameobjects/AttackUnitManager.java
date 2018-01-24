@@ -9,7 +9,7 @@ import bc.UnitType;
 
 public class AttackUnitManager extends BasicUnitManager{
 	private ArrayList<AttackUnit> attackUnits;
-	private GameAnalyzer ga;
+	protected GameAnalyzer ga;
 	 
 	public AttackUnitManager(GameController gc, ArrayList<GameObject> unitList, GameAnalyzer ga) {
 		super(gc, unitList);

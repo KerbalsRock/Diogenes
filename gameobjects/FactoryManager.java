@@ -8,7 +8,6 @@ import bc.UnitType;
 
 public class FactoryManager extends BuildingManager{
 	public ArrayList<Factory> factories;
-	boolean produceRangerLast;
 	public FactoryManager(GameController gc, ArrayList<GameObject> objectList) {
 		super(gc, objectList);
 		factories = new ArrayList<Factory>();
