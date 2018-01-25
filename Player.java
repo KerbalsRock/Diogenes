@@ -32,34 +32,38 @@ public class Player {
    	double militaryScore = 0;
    	ArrayList<Integer> processedIds = new ArrayList<Integer>();
 
+   	gc.queueResearch(UnitType.Healer);
+   	gc.queueResearch(UnitType.Mage);
+   	gc.queueResearch(UnitType.Rocket);
+   	
     while (true) {
-    	if(gc.planet().equals(Planet.Mars)){
-    		gc.nextTurn();
-    	}
-    	System.out.println(gc.getTimeLeftMs());
-    	VecUnit myUnits = gc.myUnits();
-    	//System.out.println("my units :"+myUnits);
-    	for(int i = 0; i < myUnits.size(); i++){
-    		Unit u = myUnits.get(i);
-    		int id = u.id();
-    		if(!processedIds.contains(id)){
-    			processedIds.add(id);
-    			if(u.unitType().equals(UnitType.Factory)){
-    				factoryManager.add(new Factory(gc, id));
-    			}
-    			else if(u.unitType().equals(UnitType.Worker)){
-    				workerManager.add(new Worker(gc, id));
-    			}
-    			else if(u.unitType().equals(UnitType.Ranger)){
-    				rangerManager.add(new Ranger(gc, id));
-    			}
-    		}
-    	}
-    	factoryManager.update();
-    	workerManager.update();
-    	rangerManager.update();
-        gc.nextTurn();
-    }
-    
+	    	if(gc.planet().equals(Planet.Mars)){
+	    		gc.nextTurn();
+	    	}
+	    	System.out.println(gc.getTimeLeftMs());
+	    	VecUnit myUnits = gc.myUnits();
+	    	//System.out.println("my units :"+myUnits);
+	    	for(int i = 0; i < myUnits.size(); i++){
+	    		Unit u = myUnits.get(i);
+	    		int id = u.id();
+	    		if(!processedIds.contains(id)){
+	    			processedIds.add(id);
+	    			if(u.unitType().equals(UnitType.Factory)){
+	    				factoryManager.add(new Factory(gc, id));
+	    			}
+	    			else if(u.unitType().equals(UnitType.Worker)){
+	    				workerManager.add(new Worker(gc, id));
+	    			}
+	    			else if(u.unitType().equals(UnitType.Ranger)){
+	    				rangerManager.add(new Ranger(gc, id));
+	    			}
+	    		}
+	    	}
+	    	factoryManager.update();
+	    	workerManager.update();
+	    	rangerManager.update();
+	        gc.nextTurn();
+	    }
+	    
     }
 }

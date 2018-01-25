@@ -24,5 +24,17 @@ public class Healer extends AttackUnit{
 		}
 		return false;
 	}
+	
+	public void update() {
+		switch(currentTask) {
+		case 0:
+			followPath();
+		case 1:
+			moveToward(gc.unit(targetId).location().mapLocation());
+			heal(targetId);
+		case 2:
+			overcharge(targetId);
+		}
+	}
 
 }
