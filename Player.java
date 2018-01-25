@@ -25,7 +25,7 @@ public class Player {
 	GameAnalyzer analyzer = new GameAnalyzer(gc);
    	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
    	RangerManager rangerManager = new RangerManager(gc, new ArrayList<GameObject>(), analyzer);
-   	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>());
+   	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>(), workerManager);
    	System.out.println("path to enemy :"+analyzer.pathToEnemy);
    	double earthScore = analyzer.earthScore;
    	double economyScore = 0;
@@ -55,9 +55,9 @@ public class Player {
     			}
     		}
     	}
-    	workerManager.update();
-    	attackManager.update();
     	factoryManager.update();
+    	workerManager.update();
+    	rangerManager.update();
         gc.nextTurn();
     }
     

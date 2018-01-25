@@ -19,12 +19,8 @@ public class Ranger extends AttackUnit{
 		}
 		
 		public void update(){
-			//target id is closest enemy, at least for now.
-			if(!gc.canSenseUnit(targetId)){
-				getClosestEnemy();
-			}
+			
 			//attack manager assigns targets, then updates. check for attacking if able before and after moves.
-			attack(targetId);
 			if(!gc.canSenseUnit(targetId)){
 				getClosestEnemy();
 			}
@@ -37,31 +33,23 @@ public class Ranger extends AttackUnit{
 				case 1:
 					//hold position, literally nothing goes here
 				case 2:
+					targetId = getClosestEnemy();
 					if(!gc.canSenseUnit(targetId)){
 						return;
 					}
-					moveToward(gc.unit(targetId).location().mapLocation());//charge enemy
+					Direction toEnemy = gc.unit(targetId).location().mapLocation().directionTo(gc.unit(id).location().mapLocation());
+					long enemyDistance = gc.unit(targetId).location().mapLocation().distanceSquaredTo(gc.unit(id).location().mapLocation());
+					if(enemyDistance > 50) {
+						move(toEnemy);
+					}if(enemyDistance < 34) {
+						move(rotate(toEnemy, 4));
+					}
+					attack(targetId);
 				case 3:
-					if(!gc.canSenseUnit(targetId)){
-						return;
-					}
-					Direction toEnemy = gc.unit(targetId).location().mapLocation().directionTo(gc.unit(id).location().mapLocation());//kite
-					kite();
-				case 4:
 					if(!load(targetId, id)){
 						moveToward(gc.unit(id).location().mapLocation());
 					}//get in rocket if necessary
 			}
 			attack(targetId);
-		}
-		
-		public void kite() {
-			Direction toEnemy = gc.unit(targetId).location().mapLocation().directionTo(gc.unit(id).location().mapLocation());//kite
-			if(gc.unit(id).attackHeat() > 10){
-				moveToward(rotate(toEnemy, 4));
-			}
-			else{
-				moveToward(toEnemy);
-			}
 		}
 }

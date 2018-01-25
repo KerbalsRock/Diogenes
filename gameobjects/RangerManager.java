@@ -33,7 +33,7 @@ public class RangerManager extends AttackUnitManager {
 			}
 			//if it's following a path and an enemy enters vision, enter the chosen attack stance, kite for now
 			if(u.currentTask == 0 && u.getClosestEnemy() != 0){
-				u.currentTask = 3;//kite
+				u.currentTask = 2;
 			}
 		}
 		for(Ranger u : rangers){
