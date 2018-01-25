@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import analyzers.GameAnalyzer;
 import bc.GameController;
+import bc.Planet;
 
 public class HealerManager extends AttackUnitManager{
 	public ArrayList<Healer> healers;
@@ -12,5 +13,40 @@ public class HealerManager extends AttackUnitManager{
 		for(GameObject o : unitList) {
 			healers.add((Healer)o);
 		}
+	}
+	
+	public void update() {
+		for(int i = 0; i < healers.size(); i++){
+			Healer u = healers.get(i);
+			if(!gc.canSenseUnit(u.id)){
+				healers.remove(u);
+				i--;
+				continue;
+			}
+			if(gc.unit(u.id).location().isInGarrison()){
+				continue;
+			}
+			/*if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth)){
+				u.pathToEnemy = ga.pathToEnemy;
+				u.currentTask = 0;
+				u.hasFollowedPath = true;
+				continue;
+			}*/
+			//if it's following a path and an enemy enters vision, enter the chosen attack stance, kite for now
+			//WRITE FIND DAMAGED CODE
+		}
+		for(Healer u : healers){
+			if(gc.unit(u.id).location().isInGarrison()){
+				continue;
+			}
+			u.update();
+		}
+	}
+
+	public void add(Healer u) {
+		healers.add(u);
+	}
+	public void remove(Healer u) {
+		healers.remove(u);
 	}
 }
