@@ -33,11 +33,11 @@ public class Ranger extends AttackUnit{
 				case 1:
 					//hold position, literally nothing goes here
 				case 2:
-					targetId = getClosestEnemy();
+					getClosestEnemy();
 					if(!gc.canSenseUnit(targetId)){
 						return;
 					}
-					Direction toEnemy = gc.unit(targetId).location().mapLocation().directionTo(gc.unit(id).location().mapLocation());
+					Direction toEnemy = gc.unit(id).location().mapLocation().directionTo(gc.unit(targetId).location().mapLocation());
 					long enemyDistance = gc.unit(targetId).location().mapLocation().distanceSquaredTo(gc.unit(id).location().mapLocation());
 					if(enemyDistance > 50) {
 						move(toEnemy);

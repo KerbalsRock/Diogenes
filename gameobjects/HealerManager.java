@@ -26,14 +26,13 @@ public class HealerManager extends AttackUnitManager{
 			if(gc.unit(u.id).location().isInGarrison()){
 				continue;
 			}
-			/*if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth)){
+			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth)){
 				u.pathToEnemy = ga.pathToEnemy;
 				u.currentTask = 0;
 				u.hasFollowedPath = true;
 				continue;
-			}*/
+			}
 			//if it's following a path and an enemy enters vision, enter the chosen attack stance, kite for now
-			u.currentTask = 1;
 		}
 		for(Healer u : healers){
 			if(gc.unit(u.id).location().isInGarrison()){

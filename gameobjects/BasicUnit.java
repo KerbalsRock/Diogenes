@@ -49,7 +49,7 @@ public class BasicUnit extends GameObject{
 	public boolean moveRandomly(){
 		int rand = (int)Math.random()*8;
 		for(int i = 0; i < directions.length; i++){
-			if(move(rotate(directions[rand], i))){
+			if(moveToward(rotate(directions[rand], i))){
 				return true;
 			}
 		}
@@ -67,10 +67,13 @@ public class BasicUnit extends GameObject{
 	}
 	
 	public boolean followPath() {
-		if(gc.unit(id).location().mapLocation().distanceSquaredTo(pathToEnemy.locList.get(pathIndex)) <= 2 && pathIndex < pathToEnemy.locList.size()-1){
-			pathIndex++;
-		}
-		return moveToward(pathToEnemy.locList.get(pathIndex));
+		 if(moveToward(pathToEnemy.locList.get(pathIndex))) {
+			 if(pathIndex< pathToEnemy.locList.size() -1) {
+				 pathIndex++;
+			 }
+			 return true;
+		 }
+		 return false;
 	}
 
 }

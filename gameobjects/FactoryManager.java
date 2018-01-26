@@ -36,9 +36,13 @@ public class FactoryManager extends BuildingManager{
 				}
 			}
 			if(madeRangerLast){
-				f.makeUnit(UnitType.Healer);
+				if(f.makeUnit(UnitType.Healer)) {
+					madeRangerLast = false;
+				}
 			}else {
-				f.makeUnit(UnitType.Ranger);
+				if(f.makeUnit(UnitType.Ranger)) {
+					madeRangerLast = true;
+				}
 			}
 			f.unload();
 		}

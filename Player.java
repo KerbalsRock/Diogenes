@@ -8,6 +8,8 @@ import gameobjects.AttackUnitManager;
 import gameobjects.Factory;
 import gameobjects.FactoryManager;
 import gameobjects.GameObject;
+import gameobjects.Healer;
+import gameobjects.HealerManager;
 import gameobjects.Knight;
 import gameobjects.Mage;
 import gameobjects.Ranger;
@@ -25,6 +27,7 @@ public class Player {
 	GameAnalyzer analyzer = new GameAnalyzer(gc);
    	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
    	RangerManager rangerManager = new RangerManager(gc, new ArrayList<GameObject>(), analyzer);
+   	HealerManager healerManager = new HealerManager(gc, new ArrayList<GameObject>(), analyzer);
    	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>(), workerManager);
    	System.out.println("path to enemy :"+analyzer.pathToEnemy);
    	double earthScore = analyzer.earthScore;
@@ -33,7 +36,7 @@ public class Player {
    	ArrayList<Integer> processedIds = new ArrayList<Integer>();
 
    	gc.queueResearch(UnitType.Healer);
-   	gc.queueResearch(UnitType.Mage);
+   	gc.queueResearch(UnitType.Ranger);
    	gc.queueResearch(UnitType.Rocket);
    	
     while (true) {
@@ -57,11 +60,15 @@ public class Player {
 	    			else if(u.unitType().equals(UnitType.Ranger)){
 	    				rangerManager.add(new Ranger(gc, id));
 	    			}
+	    			else if(u.unitType().equals(UnitType.Healer)){
+	    				healerManager.add(new Healer(gc, id));
+	    			}
 	    		}
 	    	}
-	    	factoryManager.update();
 	    	workerManager.update();
+	    	factoryManager.update();
 	    	rangerManager.update();
+	    	healerManager.update();
 	        gc.nextTurn();
 	    }
 	    

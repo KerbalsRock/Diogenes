@@ -138,15 +138,16 @@ public class Worker extends BasicUnit{
 			followPath();//follow de way
 			harvestNearby();
 		case 1:
-			if(!gc.canSenseUnit(gc.unit(targetId).id())) {
+			if(!gc.canSenseUnit(targetId)) {
 				currentTask = 5;
 			}
 			if(!load(targetId, id)){
 				moveToward(gc.unit(id).location().mapLocation());
 			 }//load rocket if necessary
 		case 2:
-			if(!gc.canSenseUnit(gc.unit(targetId).id())) {
+			if(!gc.canSenseUnit(targetId)) {
 				currentTask = 5;
+				return;
 			}
 			if(gc.unit(targetId).health()==gc.unit(targetId).maxHealth()) {
 				currentTask = 5;
@@ -158,7 +159,7 @@ public class Worker extends BasicUnit{
 		case 3:
 			blueprint(UnitType.Factory);
 		case 4:
-			blueprint(UnitType.Rocket);
+			//blueprint(UnitType.Rocket);
 		case 5:
 			if(!harvestNearby()){
 				moveRandomly();
