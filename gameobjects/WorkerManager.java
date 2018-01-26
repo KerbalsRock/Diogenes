@@ -58,7 +58,7 @@ public class WorkerManager extends BasicUnitManager {
 	}
 	
 	public void getFactoryNeed(){
-		if(gc.karbonite() > 100){
+		if(gc.karbonite() >= 200){
 			factoryNeed = true;
 		}
 	}

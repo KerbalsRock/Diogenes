@@ -1,6 +1,9 @@
 package gameobjects;
 import bc.Direction;
 import bc.GameController;
+import bc.MapLocation;
+import bc.Unit;
+import bc.VecUnit;
 public class Healer extends AttackUnit{
 
 	public Healer(GameController gc) {
@@ -31,8 +34,8 @@ public class Healer extends AttackUnit{
 		case 0:
 			followPath();
 		case 1:
+			findNearestDamaged();
 			if(!gc.canSenseUnit(targetId)) {
-				currentTask = 3;
 				return;
 			}
 			Direction toTarget = gc.unit(targetId).location().mapLocation().directionTo(gc.unit(id).location().mapLocation());
@@ -47,5 +50,21 @@ public class Healer extends AttackUnit{
 			overcharge(targetId);
 		}
 	}
-
+	private int findNearestDamaged() {
+		Unit self = gc.unit(id);
+		MapLocation myLocation = self.location().mapLocation();
+		VecUnit nearbyAllies = gc.senseNearbyUnitsByTeam(myLocation, self.visionRange(), gc.team());
+		int closestDistance = 1000000;
+		for(int i = 0; i < nearbyAllies.size(); i++){
+			if(nearbyAllies.get(i).health()==nearbyAllies.get(i).maxHealth()) {
+				continue;
+			}
+			int allyDistance = (int) nearbyAllies.get(i).location().mapLocation().distanceSquaredTo(myLocation);
+			if(allyDistance < closestDistance){
+				closestDistance = allyDistance;
+				targetId = nearbyAllies.get(i).id();
+			}
+		}
+		return targetId;
+	}
 }

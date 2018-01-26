@@ -33,7 +33,7 @@ public class HealerManager extends AttackUnitManager{
 				continue;
 			}*/
 			//if it's following a path and an enemy enters vision, enter the chosen attack stance, kite for now
-			//WRITE FIND DAMAGED CODE
+			u.currentTask = 1;
 		}
 		for(Healer u : healers){
 			if(gc.unit(u.id).location().isInGarrison()){

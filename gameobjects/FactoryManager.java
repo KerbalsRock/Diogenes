@@ -8,6 +8,7 @@ import bc.UnitType;
 
 public class FactoryManager extends BuildingManager{
 	public ArrayList<Factory> factories;
+	private boolean madeRangerLast;
 	private WorkerManager workerManager;
 	public FactoryManager(GameController gc, ArrayList<GameObject> objectList, WorkerManager workerManager) {
 		super(gc, objectList);
@@ -34,7 +35,11 @@ public class FactoryManager extends BuildingManager{
 					w.currentTask = 2;
 				}
 			}
-			f.makeUnit(UnitType.Ranger);
+			if(madeRangerLast){
+				f.makeUnit(UnitType.Healer);
+			}else {
+				f.makeUnit(UnitType.Ranger);
+			}
 			f.unload();
 		}
 	}
