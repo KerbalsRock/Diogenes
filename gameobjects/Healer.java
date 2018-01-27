@@ -4,6 +4,7 @@ import bc.GameController;
 import bc.MapLocation;
 import bc.Unit;
 import bc.VecUnit;
+import pathfinder.Path;
 public class Healer extends AttackUnit{
 
 	public Healer(GameController gc) {
@@ -12,6 +13,11 @@ public class Healer extends AttackUnit{
 	}
 	public Healer(GameController gc, int id ) {
 		super(gc, id);
+		currentTask = 0;
+	}
+	
+	public Healer(GameController gc, int id, Path p) {
+		super(gc, id, p);
 		currentTask = 0;
 	}
 	

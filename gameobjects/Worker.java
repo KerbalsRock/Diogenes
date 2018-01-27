@@ -79,40 +79,66 @@ public class Worker extends BasicUnit{
 		return false;
 	}
 	
-	public boolean harvestClosest(){
+	/*public boolean harvestClosest(){
 		if(harvestNearby()){
 			return true;
 		}
 		return move(gc.unit(id).location().mapLocation().directionTo(closestKarbonite(2)));
-	}
+	}*/
 	
-	public MapLocation closestKarbonite(int layer){
+	public MapLocation closestKarbonite(int layer, int maxDistance){
 		MapLocation loc = gc.unit(id).location().mapLocation();
 		for(int i = -layer; i <= layer; i++){
 			MapLocation newloc = loc.translate(-layer, i);
-			if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+			if(newloc.getX()<0||newloc.getX()>=gc.startingMap(Planet.Earth).getWidth()-1||newloc.getY()<0||newloc.getY()>=gc.startingMap(Planet.Earth).getHeight()-1) {
+				continue;
+			}
+			if(gc.isOccupiable(newloc) == 1 && gc.karboniteAt(newloc)>0){
 				return newloc;
 			}
 		}
 		for(int i = -layer; i <= layer; i++){
 			MapLocation newloc = loc.translate(layer, i);
-			if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+			if(newloc.getX()<0||newloc.getX()>=gc.startingMap(Planet.Earth).getWidth()-1||newloc.getY()<0||newloc.getY()>=gc.startingMap(Planet.Earth).getHeight()-1) {
+				continue;
+			}
+			if(newloc.getPlanet()==null) {
+				continue;
+			}
+			if(gc.isOccupiable(newloc) == 1 && gc.karboniteAt(newloc)>0){
 				return newloc;
 			}
 		}
 		for(int i = -layer+1; i < layer; i++){
 			MapLocation newloc = loc.translate(i, -layer);
-			if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+			if(newloc.getX()<0||newloc.getX()>=gc.startingMap(Planet.Earth).getWidth()-1||newloc.getY()<0||newloc.getY()>=gc.startingMap(Planet.Earth).getHeight()-1) {
+				continue;
+			}
+			if(newloc.getPlanet()==null) {
+				continue;
+			}
+			if(gc.isOccupiable(newloc) == 1 && gc.karboniteAt(newloc)>0){
 				return newloc;
 			}
 		}
 		for(int i = -layer+1; i < layer; i++){
 			MapLocation newloc = loc.translate(i, layer);
-			if(gc.karboniteAt(newloc)>0 && gc.isOccupiable(newloc) == 1){
+			if(newloc.getX()<0||newloc.getX()>=gc.startingMap(Planet.Earth).getWidth()-1||newloc.getY()<0||newloc.getY()>=gc.startingMap(Planet.Earth).getHeight()-1) {
+				continue;
+			}
+			if(newloc.getPlanet()==null) {
+				continue;
+			}
+			if(gc.isOccupiable(newloc) == 1 && gc.karboniteAt(newloc)>0){
 				return newloc;
 			}
 		}
-		return closestKarbonite(layer+1);
+		maxDistance--;
+		if(maxDistance == 0) {
+			return null;
+		}else {
+			return closestKarbonite(layer+1, maxDistance);
+		}
 	}
 	
 	public int getClosestFactoryBlueprint(){
@@ -133,7 +159,7 @@ public class Worker extends BasicUnit{
 	
 	public void update(){
 		//System.out.println(currentTask+", "+targetId);
-		switch(currentTask){
+		switch(currentTask) {
 		case 0:
 			followPath();//follow de way
 			harvestNearby();
@@ -162,8 +188,12 @@ public class Worker extends BasicUnit{
 			//blueprint(UnitType.Rocket);
 		case 5:
 			if(!harvestNearby()){
-				moveRandomly();
-				harvestNearby();
+				/*MapLocation closestKarb = closestKarbonite(1, 1);
+				if(closestKarb!=null) {
+					moveToward(closestKarb);
+				}else {*/
+					moveRandomly();
+				//}
 			}
 		}
 	}

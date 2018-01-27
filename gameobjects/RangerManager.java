@@ -2,11 +2,12 @@ package gameobjects;
 import java.util.ArrayList;
 import analyzers.GameAnalyzer;
 import bc.*;
+import pathfinder.Path;
 
 public class RangerManager extends AttackUnitManager {
 	public ArrayList<Ranger> rangers;
-	public RangerManager(GameController gc, ArrayList<GameObject> unitList, GameAnalyzer ga) {
-		super(gc, unitList, ga);
+	public RangerManager(GameController gc, ArrayList<GameObject> unitList) {
+		super(gc, unitList);
 		rangers = new ArrayList<Ranger>();
 		for(GameObject o : unitList) {
 			rangers.add((Ranger)o);
@@ -25,8 +26,7 @@ public class RangerManager extends AttackUnitManager {
 				continue;
 			}
 			//assign tasks and targets, default to follow path>if in range of enemy, kite
-			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth)){
-				u.pathToEnemy = ga.pathToEnemy;
+			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth) && u.pathToEnemy!=null){
 				u.currentTask = 0;
 				u.hasFollowedPath = true;
 				continue;

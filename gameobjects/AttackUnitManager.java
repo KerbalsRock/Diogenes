@@ -6,14 +6,13 @@ import bc.GameController;
 import bc.Planet;
 import bc.Team;
 import bc.UnitType;
+import pathfinder.Path;
 
 public class AttackUnitManager extends BasicUnitManager{
 	private ArrayList<AttackUnit> attackUnits;
-	protected GameAnalyzer ga;
 	 
-	public AttackUnitManager(GameController gc, ArrayList<GameObject> unitList, GameAnalyzer ga) {
+	public AttackUnitManager(GameController gc, ArrayList<GameObject> unitList) {
 		super(gc, unitList);
-		this.ga = ga;
 		attackUnits = new ArrayList<AttackUnit>();
 		for(GameObject o : unitList) {
 			attackUnits.add((AttackUnit)o);
@@ -32,8 +31,7 @@ public class AttackUnitManager extends BasicUnitManager{
 				continue;
 			}
 			//assign tasks and targets, default to follow path>if in range of enemy, kite
-			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth)){
-				u.pathToEnemy = ga.pathToEnemy;
+			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth) && u.pathToEnemy!=null){
 				u.currentTask = 0;
 				u.hasFollowedPath = true;
 				continue;

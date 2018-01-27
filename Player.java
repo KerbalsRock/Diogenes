@@ -16,6 +16,7 @@ import gameobjects.Ranger;
 import gameobjects.RangerManager;
 import gameobjects.Worker;
 import gameobjects.WorkerManager;
+import pathfinder.PathFinder;
 
 public class Player {
     public static void main(String[] args) {
@@ -25,16 +26,16 @@ public class Player {
    		gc.nextTurn();
    	}
 	GameAnalyzer analyzer = new GameAnalyzer(gc);
+	PathFinder pathFinder = new PathFinder(analyzer.earth.getIsland(analyzer.ourStart.get(0)));
    	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
-   	RangerManager rangerManager = new RangerManager(gc, new ArrayList<GameObject>(), analyzer);
-   	HealerManager healerManager = new HealerManager(gc, new ArrayList<GameObject>(), analyzer);
+   	RangerManager rangerManager = new RangerManager(gc, new ArrayList<GameObject>());
+   	HealerManager healerManager = new HealerManager(gc, new ArrayList<GameObject>());
    	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>(), workerManager);
-   	System.out.println("path to enemy :"+analyzer.pathToEnemy);
-   	double earthScore = analyzer.earthScore;
-   	double economyScore = 0;
-   	double militaryScore = 0;
+   	//System.out.println("path to enemy :"+analyzer.pathToEnemy);
+   	//double earthScore = analyzer.earthScore;
+   	//double economyScore = 0;
+   	//double militaryScore = 0;
    	ArrayList<Integer> processedIds = new ArrayList<Integer>();
-
    	gc.queueResearch(UnitType.Healer);
    	gc.queueResearch(UnitType.Ranger);
    	gc.queueResearch(UnitType.Rocket);
@@ -49,19 +50,19 @@ public class Player {
 	    	for(int i = 0; i < myUnits.size(); i++){
 	    		Unit u = myUnits.get(i);
 	    		int id = u.id();
-	    		if(!processedIds.contains(id)){
+	    		if(!processedIds.contains(id) && !u.location().isInGarrison()){
 	    			processedIds.add(id);
 	    			if(u.unitType().equals(UnitType.Factory)){
-	    				factoryManager.add(new Factory(gc, id));
+	    				factoryManager.add(new Factory(gc, id, pathFinder, analyzer.enemyStart.get(0)));
 	    			}
 	    			else if(u.unitType().equals(UnitType.Worker)){
 	    				workerManager.add(new Worker(gc, id));
 	    			}
 	    			else if(u.unitType().equals(UnitType.Ranger)){
-	    				rangerManager.add(new Ranger(gc, id));
+	    				rangerManager.add(new Ranger(gc, id, findFactoryAdjacentTo(u.location().mapLocation(), factoryManager, gc).pathToEnemy));
 	    			}
 	    			else if(u.unitType().equals(UnitType.Healer)){
-	    				healerManager.add(new Healer(gc, id));
+	    				healerManager.add(new Healer(gc, id, findFactoryAdjacentTo(u.location().mapLocation(), factoryManager, gc).pathToEnemy));
 	    			}
 	    		}
 	    	}
@@ -71,6 +72,14 @@ public class Player {
 	    	healerManager.update();
 	        gc.nextTurn();
 	    }
+    }
+    public static Factory findFactoryAdjacentTo(MapLocation loc, FactoryManager fm, GameController gc){
+		for(Factory f : fm.factories) {
+			if(gc.unit(f.id).location().mapLocation().isAdjacentTo(loc)) {
+				return f;
+			}
+		}
+		return null;
 	    
     }
 }

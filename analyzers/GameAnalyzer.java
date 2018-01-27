@@ -38,11 +38,11 @@ public class GameAnalyzer {
 		orbit = gc.orbitPattern();
 		asteroids = gc.asteroidPattern();
 		availableKarb = 0;
-		if(gc.planet().equals(Planet.Earth)){
+		/*if(gc.planet().equals(Planet.Earth)){
 			analyzeEarth();
 		}
 		analyzeMars();
-		analyzeOrbit();
+		analyzeOrbit();*/
 	}
 	
 	private void findStartingLocs(){

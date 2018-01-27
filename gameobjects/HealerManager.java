@@ -7,8 +7,8 @@ import bc.Planet;
 
 public class HealerManager extends AttackUnitManager{
 	public ArrayList<Healer> healers;
-	public HealerManager(GameController gc, ArrayList<GameObject> unitList, GameAnalyzer ga) {
-		super(gc, unitList, ga);
+	public HealerManager(GameController gc, ArrayList<GameObject> unitList) {
+		super(gc, unitList);
 		healers = new ArrayList<Healer>();
 		for(GameObject o : unitList) {
 			healers.add((Healer)o);
@@ -26,8 +26,7 @@ public class HealerManager extends AttackUnitManager{
 			if(gc.unit(u.id).location().isInGarrison()){
 				continue;
 			}
-			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth)){
-				u.pathToEnemy = ga.pathToEnemy;
+			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth) && u.pathToEnemy!=null){
 				u.currentTask = 0;
 				u.hasFollowedPath = true;
 				continue;

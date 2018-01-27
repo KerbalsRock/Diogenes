@@ -4,6 +4,7 @@ import bc.GameController;
 import bc.MapLocation;
 import bc.Unit;
 import bc.VecUnit;
+import pathfinder.Path;
 
 public class AttackUnit extends BasicUnit{
 	public boolean hasFollowedPath = false;
@@ -13,6 +14,11 @@ public class AttackUnit extends BasicUnit{
 	}
 	public AttackUnit(GameController gc, int id) {
 		super(gc, id);
+	}
+	
+	public AttackUnit(GameController gc, int id, Path p) {
+		super(gc, id);
+		pathToEnemy = p;
 	}
 	
 	public boolean attack(int targetId) {

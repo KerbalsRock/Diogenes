@@ -1,13 +1,17 @@
 package gameobjects;
 import bc.*;
+import pathfinder.Path;
+import pathfinder.PathFinder;
 public class Factory extends Building{
-
-	public Factory(GameController gc) {
-		super(gc);
+	public Path pathToEnemy;
+	public Factory(GameController gc, int id, PathFinder p, MapLocation loc) {
+		super(gc, id);
+		pathToEnemy = p.generatePath(gc.unit(id).location().mapLocation(), loc);
 	}
 	
-	public Factory(GameController gc, int id) {
+	public Factory(GameController gc, int id, Path p) {
 		super(gc, id);
+		pathToEnemy = p;
 	}
 	
 	public boolean makeUnit(UnitType type) {
