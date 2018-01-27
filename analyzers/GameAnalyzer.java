@@ -48,11 +48,13 @@ public class GameAnalyzer {
 	private void findStartingLocs(){
 		ourStart = new ArrayList<MapLocation>();
 		enemyStart = new ArrayList<MapLocation>();
-		for(int i = 0; i < gc.myUnits().size(); i++) {
-			Unit u = gc.myUnits().get(i);
-			ourStart.add(u.location().mapLocation());
-			//inverted from ourStart
-			enemyStart.add(new MapLocation(Planet.Earth, Math.abs((int)earth.p.getWidth()-1-u.location().mapLocation().getX()), Math.abs((int)earth.p.getHeight()-1-u.location().mapLocation().getY())));
+		for(int i = 0; i < earth.p.getInitial_units().size(); i++) {
+			Unit u = earth.p.getInitial_units().get(i);
+			if(u.team().equals(gc.team())) {
+				ourStart.add(u.location().mapLocation());
+			}else {
+				enemyStart.add(u.location().mapLocation());
+			}
 		}	
 		if(ourStart.isEmpty()){
 			MapLocation initial = new MapLocation(Planet.Mars, 0, 0);
