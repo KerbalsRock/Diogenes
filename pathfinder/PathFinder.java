@@ -33,7 +33,7 @@ public class PathFinder {
 				contains = true;
 			}
 		}
-		if(contains = false){
+		if(contains == false){
 			return null;
 		}
 		AStarNode startNode = island.convertToHashMap().get(startLoc.toString());

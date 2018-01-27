@@ -8,12 +8,12 @@ import bc.*;
 public class PlanetAnalyzer {
 	public GameController gc;
 	public PlanetMap p;
-	public ArrayList<Island> islands;
-	public ArrayList<MapLocation> impassable;
+	public Island island;
 	
 	public PlanetAnalyzer(GameController gc, PlanetMap p){
 		this.gc = gc;
 		this.p = p;
+		makeIsland();
 	}
 	
 	public ArrayList<MapLocation> getAdjacent(MapLocation loc){
@@ -27,8 +27,18 @@ public class PlanetAnalyzer {
 	}
 	
 	//undelete this
-	public void makeIslands(MapLocation initial){
-		int n = 0;
+	private void makeIsland(){
+		ArrayList<MapLocation> locList = new ArrayList<MapLocation>();
+		for(int i = 0; i < p.getHeight(); i++) {
+			for(int j = 0; j < p.getWidth(); j++) {
+				MapLocation newLoc = new MapLocation(p.getPlanet(), j, i);
+				if(p.isPassableTerrainAt(newLoc)==1){
+					locList.add(newLoc);
+				}
+			}
+		}
+		island = new Island(locList);
+		/*int n = 0;
 		//probably do breadth first search from ourStart and move all found passable locations from unexplored
 		//to section 1, and all found impassable locations to impassable, then iterate through unexplored and
 		//add all impassable to impassable and start a new bfs at any new passable location and repeat
@@ -88,15 +98,6 @@ public class PlanetAnalyzer {
 				closed = new ArrayList<MapLocation>();
 			}
 		}
-		System.out.println(n);
-	}
-	
-	public Island getIsland(MapLocation loc){
-		for(Island i : islands){
-			if(i.list.contains(loc)){
-				return i;
-			}
-		}
-		return null;
+		System.out.println(n);*/
 	}
 }

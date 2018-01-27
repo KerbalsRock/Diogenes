@@ -26,7 +26,7 @@ public class Player {
    		gc.nextTurn();
    	}
 	GameAnalyzer analyzer = new GameAnalyzer(gc);
-	PathFinder pathFinder = new PathFinder(analyzer.earth.getIsland(analyzer.ourStart.get(0)));
+	PathFinder pathFinder = new PathFinder(analyzer.earth.island);
    	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
    	RangerManager rangerManager = new RangerManager(gc, new ArrayList<GameObject>());
    	HealerManager healerManager = new HealerManager(gc, new ArrayList<GameObject>());

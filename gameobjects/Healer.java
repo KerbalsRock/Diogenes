@@ -56,7 +56,7 @@ public class Healer extends AttackUnit{
 			long targetDistance = gc.unit(id).location().mapLocation().distanceSquaredTo(gc.unit(targetId).location().mapLocation());
 			if(targetDistance > 30) {
 				moveToward(toTarget);
-			}else if(targetDistance < 10) {
+			}else if(targetDistance < 20) {
 				moveToward(rotate(toTarget,4));
 			}
 			heal(targetId);

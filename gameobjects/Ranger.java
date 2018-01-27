@@ -40,25 +40,25 @@ public class Ranger extends AttackUnit{
 				case 1:
 					//hold position, literally nothing goes here
 				case 2:
-					getClosestEnemy();
+					targetId = getClosestEnemy();
 					if(!gc.canSenseUnit(targetId)){
 						return;
 					}
 					Direction toEnemy = gc.unit(id).location().mapLocation().directionTo(gc.unit(targetId).location().mapLocation());
 					Direction toPath = gc.unit(id).location().mapLocation().directionTo(pathToEnemy.locList.get(pathIndex));
 					long enemyDistance = gc.unit(targetId).location().mapLocation().distanceSquaredTo(gc.unit(id).location().mapLocation());
-					if(toEnemy.equals(toPath)||toEnemy.equals(rotate(toPath,1))||toEnemy.equals(rotate(toPath,-1)) || !hasFollowedPath)
-					{
+					//if(toEnemy.equals(toPath)||toEnemy.equals(rotate(toPath,1))||toEnemy.equals(rotate(toPath,-1)) || !hasFollowedPath)
+					//{
 						if(enemyDistance > 50) {
 							move(toEnemy);
 						}if(enemyDistance < 34) {
 							move(rotate(toEnemy, 4));
 						}
 						attack(targetId);
-					}else {
+					/*}else {
 						attack(targetId);
 						followPath();
-					}
+					}*/
 					
 				case 3:
 					if(!load(targetId, id)){

@@ -27,9 +27,6 @@ public class GameAnalyzer {
 		this.gc = gc;
 		earth = new PlanetAnalyzer(gc, gc.startingMap(Planet.Earth));
 		findStartingLocs();
-		System.out.println("Before islands");
-		earth.makeIslands(ourStart.get(0));
-		System.out.println("After islands");
 		/*if(gc.planet().equals(Planet.Mars)){
 			mars = new PlanetAnalyzer(gc, gc.startingMap(Planet.Mars));
 			mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));
@@ -58,10 +55,10 @@ public class GameAnalyzer {
 	}
 	
 	private void analyzeEarth(){
-		PathFinder p = new PathFinder(earth.islands.get(0));
+		PathFinder p = new PathFinder(earth.island);
 		PlanetMap pl = gc.startingMap(Planet.Earth);
-		startingIslandSize = earth.islands.get(0).list.size();
-		for(MapLocation mapLoc : earth.islands.get(0).list) {
+		startingIslandSize = earth.island.list.size();
+		for(MapLocation mapLoc : earth.island.list) {
 			availableKarb += pl.initialKarboniteAt(mapLoc);
 		}
 		pathToEnemy = p.generatePath(ourStart.get(0), enemyStart.get(0));
