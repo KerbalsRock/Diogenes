@@ -73,7 +73,7 @@ public class WorkerManager extends BasicUnitManager {
 			long closestDistance = 100000;
 			int index = -1;
 			for(int i = 0; i < workerList.size(); i++) {
-				if(usedIndexes.contains(i)) {
+				if(usedIndexes.contains(i)||!gc.canSenseUnit(workerList.get(i).id)) {
 					continue;
 				}
 				long currentDistance =  gc.unit(workerList.get(i).id).location().mapLocation().distanceSquaredTo(loc);
