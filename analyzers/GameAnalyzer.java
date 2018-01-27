@@ -27,11 +27,10 @@ public class GameAnalyzer {
 		this.gc = gc;
 		earth = new PlanetAnalyzer(gc, gc.startingMap(Planet.Earth));
 		findStartingLocs();
+		System.out.println("Before islands");
 		earth.makeIslands(ourStart.get(0));
-		//System.out.println("island 0: "+earth.islands.get(0).list);
-		System.out.println("our start: "+ourStart);
-		System.out.println("enemy start: "+enemyStart);
-		if(gc.planet().equals(Planet.Mars)){
+		System.out.println("After islands");
+		/*if(gc.planet().equals(Planet.Mars)){
 			mars = new PlanetAnalyzer(gc, gc.startingMap(Planet.Mars));
 			mars.makeIslands((new MapLocation(Planet.Mars, 0, 0)));
 		}
@@ -56,15 +55,6 @@ public class GameAnalyzer {
 				enemyStart.add(u.location().mapLocation());
 			}
 		}	
-		if(ourStart.isEmpty()){
-			MapLocation initial = new MapLocation(Planet.Mars, 0, 0);
-			PlanetMap p = gc.startingMap(Planet.Mars);
-			while(p.isPassableTerrainAt(initial) == 0){
-				Random r = new Random();
-				initial = new MapLocation(p.getPlanet(), r.nextInt((int)p.getWidth()), r.nextInt((int)p.getHeight()));
-			}
-			ourStart.add(initial);
-		}
 	}
 	
 	private void analyzeEarth(){
