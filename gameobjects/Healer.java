@@ -60,7 +60,7 @@ public class Healer extends AttackUnit{
 				moveToward(rotate(toTarget,4));
 			}
 			heal(targetId);
-			moveRandomly();
+			followPath();
 		case 2:
 			overcharge(targetId);
 		}
