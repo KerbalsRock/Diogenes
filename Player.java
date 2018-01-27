@@ -47,6 +47,7 @@ public class Player {
 	    	System.out.println(gc.getTimeLeftMs());
 	    	VecUnit myUnits = gc.myUnits();
 	    	//System.out.println("my units :"+myUnits);
+	    	factoryManager.update();
 	    	for(int i = 0; i < myUnits.size(); i++){
 	    		Unit u = myUnits.get(i);
 	    		int id = u.id();
@@ -66,8 +67,7 @@ public class Player {
 	    			}
 	    		}
 	    	}
-	    	workerManager.update();
-	    	factoryManager.update();
+	    	workerManager.update();	    
 	    	rangerManager.update();
 	    	healerManager.update();
 	        gc.nextTurn();
