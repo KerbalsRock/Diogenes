@@ -54,7 +54,7 @@ public class Player {
 	    		if(!processedIds.contains(id) && !u.location().isInGarrison()){
 	    			processedIds.add(id);
 	    			if(u.unitType().equals(UnitType.Factory)){
-	    				factoryManager.add(new Factory(gc, id, pathFinder, analyzer.enemyStart.get(0)));
+	    				factoryManager.add(new Factory(gc, id, pathFinder, analyzer.enemyStart));
 	    			}
 	    			else if(u.unitType().equals(UnitType.Worker)){
 	    				workerManager.add(new Worker(gc, id));

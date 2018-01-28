@@ -67,7 +67,7 @@ public class BasicUnit extends GameObject{
 	}
 	
 	public boolean followPath() {
-		 if(moveToward(pathToEnemy.locList.get(pathIndex))) {
+		 if(pathToEnemy!= null && moveToward(pathToEnemy.locList.get(pathIndex))) {
 			 if(gc.unit(id).location().mapLocation().distanceSquaredTo(pathToEnemy.locList.get(pathIndex)) <= 2 && pathIndex < pathToEnemy.locList.size()-1){
 				 pathIndex++;
 			 }

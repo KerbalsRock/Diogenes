@@ -67,6 +67,9 @@ public class PathFinder {
 					
 				}
 			}
+			if(openSet.isEmpty()) {
+				return null;
+			}
 		}
 
 		ArrayList<MapLocation> locList = new ArrayList<MapLocation>();

@@ -45,7 +45,6 @@ public class Ranger extends AttackUnit{
 						return;
 					}
 					Direction toEnemy = gc.unit(id).location().mapLocation().directionTo(gc.unit(targetId).location().mapLocation());
-					Direction toPath = gc.unit(id).location().mapLocation().directionTo(pathToEnemy.locList.get(pathIndex));
 					long enemyDistance = gc.unit(targetId).location().mapLocation().distanceSquaredTo(gc.unit(id).location().mapLocation());
 					//if(toEnemy.equals(toPath)||toEnemy.equals(rotate(toPath,1))||toEnemy.equals(rotate(toPath,-1)) || !hasFollowedPath)
 					//{
