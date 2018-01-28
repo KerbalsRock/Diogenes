@@ -14,7 +14,15 @@ public class HealerManager extends AttackUnitManager{
 			healers.add((Healer)o);
 		}
 	}
-	
+	public void updateKilled(){
+		for(int i = 0; i < healers.size(); i++){
+			Healer u = healers.get(i);
+			if(!gc.canSenseUnit(u.id)){
+				healers.remove(u);
+				i--;
+			}
+		}
+	}
 	public void update() {
 		for(int i = 0; i < healers.size(); i++){
 			Healer u = healers.get(i);

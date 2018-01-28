@@ -187,14 +187,14 @@ public class Worker extends BasicUnit{
 		case 4:
 			//blueprint(UnitType.Rocket);
 		case 5:
-			if(!harvestNearby()){
+			/*if(!harvestNearby()){
 				MapLocation closestKarb = closestKarbonite(1, 4);
 				if(closestKarb!=null) {
 					moveToward(closestKarb);
-				}else {
+				}else {*/
 					moveRandomly();
-				}
-			}
+				//}
+			//}
 		}
 	}
 

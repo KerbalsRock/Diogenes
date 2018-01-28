@@ -13,15 +13,18 @@ public class RangerManager extends AttackUnitManager {
 			rangers.add((Ranger)o);
 		}
 	}
-	
-	public void update() {
+	public void updateKilled() {
 		for(int i = 0; i < rangers.size(); i++){
 			Ranger u = rangers.get(i);
 			if(!gc.canSenseUnit(u.id)){
 				rangers.remove(u);
 				i--;
-				continue;
 			}
+		}
+	}
+	public void update() {
+		for(int i = 0; i < rangers.size(); i++){
+			Ranger u = rangers.get(i);
 			if(gc.unit(u.id).location().isInGarrison()){
 				continue;
 			}

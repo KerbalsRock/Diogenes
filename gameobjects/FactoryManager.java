@@ -19,6 +19,15 @@ public class FactoryManager extends BuildingManager{
 		}
 	}
 	
+	public void updateKilled() {
+		for(int i = 0; i < factories.size(); i++){
+			Factory f = factories.get(i);
+			if(!gc.canSenseUnit(f.id)){
+				factories.remove(f);
+				i--;
+			}
+		}
+	}
 	
 	public void update() {
 		for(int i = 0; i < factories.size(); i++){

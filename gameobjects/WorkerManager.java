@@ -14,6 +14,16 @@ public class WorkerManager extends BasicUnitManager {
 		}
 	}
 	
+	public void updateKilled(){
+		for(int i = 0; i < workerList.size(); i++){
+			Worker worker = workerList.get(i);
+			if(!gc.canSenseUnit(worker.id)){
+				workerList.remove(worker);
+				i--;
+			}
+		}
+	}
+	
 	public void update(){
 		getFactoryNeed();
 		int workersThisTurn = 0;
