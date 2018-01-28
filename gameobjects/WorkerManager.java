@@ -6,6 +6,9 @@ public class WorkerManager extends BasicUnitManager {
 	public ArrayList<Worker> workerList;
 	public boolean factoryNeed;
 	public int optimalWorkers = 5;
+	public boolean neverLaunchedRocket = true;
+	public boolean rocketNeed;
+	
 	public WorkerManager(GameController gc, ArrayList<GameObject> objectList) {
 		super(gc, objectList);
 		workerList = new ArrayList<Worker>();
@@ -25,6 +28,7 @@ public class WorkerManager extends BasicUnitManager {
 	}
 	
 	public void update(){
+		getRocketNeed();
 		getFactoryNeed();
 		int workersThisTurn = 0;
 		for(int i = 0; i < workerList.size(); i++){
@@ -34,10 +38,14 @@ public class WorkerManager extends BasicUnitManager {
 				i--;
 				continue;
 			}
-			if(gc.unit(worker.id).location().isInGarrison()){
+			if(!gc.unit(worker.id).location().isOnPlanet(gc.planet())){
 				continue;
 			}
-			if(factoryNeed && worker.currentTask == 5){
+			if(rocketNeed && worker.currentTask == 5){
+				worker.currentTask = 4;
+				rocketNeed = false;
+			}
+			else if(factoryNeed && worker.currentTask == 5){
 				worker.currentTask = 3;
 				factoryNeed = false;
 			}
@@ -73,6 +81,14 @@ public class WorkerManager extends BasicUnitManager {
 		}
 	}
 	
+	public void getRocketNeed(){
+		if(gc.researchInfo().getLevel(UnitType.Rocket) > 0 && (neverLaunchedRocket || gc.round() > 650)){
+			neverLaunchedRocket = false;
+			rocketNeed = true;
+		}
+		rocketNeed = false;
+	}
+	
 	public ArrayList<Worker> findNearestUnitsTo(MapLocation loc, int numberOfUnits) {
 		ArrayList<Worker> list = new ArrayList<Worker>();
 		ArrayList<Integer> usedIndexes = new ArrayList<Integer>();
@@ -83,7 +99,7 @@ public class WorkerManager extends BasicUnitManager {
 			long closestDistance = 100000;
 			int index = -1;
 			for(int i = 0; i < workerList.size(); i++) {
-				if(usedIndexes.contains(i)||!gc.canSenseUnit(workerList.get(i).id)) {
+				if(usedIndexes.contains(i)||!gc.canSenseUnit(workerList.get(i).id)||gc.unit(workerList.get(i).id).location().isInGarrison()) {
 					continue;
 				}
 				long currentDistance =  gc.unit(workerList.get(i).id).location().mapLocation().distanceSquaredTo(loc);
@@ -91,6 +107,9 @@ public class WorkerManager extends BasicUnitManager {
 					closestDistance = currentDistance;
 					index = i;
 				}
+			}
+			if(index == -1){
+				break;
 			}
 			list.add(workerList.get(index));
 			usedIndexes.add(index);

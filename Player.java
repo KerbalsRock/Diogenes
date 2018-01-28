@@ -14,6 +14,8 @@ import gameobjects.Knight;
 import gameobjects.Mage;
 import gameobjects.Ranger;
 import gameobjects.RangerManager;
+import gameobjects.Rocket;
+import gameobjects.RocketManager;
 import gameobjects.Worker;
 import gameobjects.WorkerManager;
 import pathfinder.PathFinder;
@@ -22,15 +24,13 @@ public class Player {
     public static void main(String[] args) {
     // Connect to the manager, starting the game
    	GameController gc = new GameController();
-   	while(gc.planet().equals(Planet.Mars)){
-   		gc.nextTurn();
-   	}
 	GameAnalyzer analyzer = new GameAnalyzer(gc);
 	PathFinder pathFinder = new PathFinder(analyzer.earth.island);
    	WorkerManager workerManager = new WorkerManager(gc, new ArrayList<GameObject>());
    	RangerManager rangerManager = new RangerManager(gc, new ArrayList<GameObject>());
    	HealerManager healerManager = new HealerManager(gc, new ArrayList<GameObject>());
    	FactoryManager factoryManager = new FactoryManager(gc, new ArrayList<GameObject>(), workerManager);
+   	RocketManager rocketManager = new RocketManager(gc, new ArrayList<GameObject>(), workerManager);
    	//System.out.println("path to enemy :"+analyzer.pathToEnemy);
    	//double earthScore = analyzer.earthScore;
    	//double economyScore = 0;
@@ -39,15 +39,16 @@ public class Player {
    	gc.queueResearch(UnitType.Healer);
    	gc.queueResearch(UnitType.Ranger);
    	gc.queueResearch(UnitType.Rocket);
+   	gc.queueResearch(UnitType.Healer);
    	
     while (true) {
-	    	if(gc.planet().equals(Planet.Mars)){
-	    		gc.nextTurn();
-	    	}
 	    	System.out.println(gc.getTimeLeftMs());
 	    	VecUnit myUnits = gc.myUnits();
 	    	//System.out.println("my units :"+myUnits);
-	    	factoryManager.updateKilled();
+	    	if(gc.planet().equals(Planet.Earth)){
+	    		factoryManager.updateKilled();
+	    		rocketManager.updateKilled();
+	    	}
 	    	workerManager.updateKilled();	    
 	    	rangerManager.updateKilled();
 	    	healerManager.updateKilled();
@@ -60,6 +61,9 @@ public class Player {
 	    			if(u.unitType().equals(UnitType.Factory)){
 	    				factoryManager.add(new Factory(gc, id, pathFinder, analyzer.enemyStart));
 	    			}
+	    			else if(u.unitType().equals(UnitType.Rocket)){
+	    				rocketManager.add(new Rocket(gc, id));
+	    			}
 	    			else if(u.unitType().equals(UnitType.Worker)){
 	    				workerManager.add(new Worker(gc, id));
 	    			}
@@ -71,10 +75,16 @@ public class Player {
 	    			}
 	    		}
 	    	}
-	    	factoryManager.update();
+	    	if(gc.planet().equals(Planet.Earth)){
+		    	rocketManager.update();
+		    	factoryManager.update();
+	    	}
 	    	workerManager.update();	    
 	    	rangerManager.update();
 	    	healerManager.update();
+	    	if(gc.planet().equals(Planet.Earth)){
+	    		rocketManager.updateLaunches();
+	    	}
 	        gc.nextTurn();
 	    }
     }

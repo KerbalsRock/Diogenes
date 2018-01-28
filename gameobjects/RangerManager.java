@@ -25,7 +25,7 @@ public class RangerManager extends AttackUnitManager {
 	public void update() {
 		for(int i = 0; i < rangers.size(); i++){
 			Ranger u = rangers.get(i);
-			if(gc.unit(u.id).location().isInGarrison()){
+			if(!gc.unit(u.id).location().isOnPlanet(gc.planet())){
 				continue;
 			}
 			//assign tasks and targets, default to follow path>if in range of enemy, kite

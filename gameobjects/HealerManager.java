@@ -31,7 +31,7 @@ public class HealerManager extends AttackUnitManager{
 				i--;
 				continue;
 			}
-			if(gc.unit(u.id).location().isInGarrison()){
+			if(!gc.unit(u.id).location().isOnPlanet(gc.planet())){
 				continue;
 			}
 			if(!u.hasFollowedPath && gc.planet().equals(Planet.Earth) && u.pathToEnemy!=null){
