@@ -5,7 +5,7 @@ import bc.*;
 public class WorkerManager extends BasicUnitManager {
 	public ArrayList<Worker> workerList;
 	public boolean factoryNeed;
-	public int optimalWorkers = 5;
+	public int optimalWorkers = 8;
 	public boolean neverLaunchedRocket = true;
 	public boolean rocketNeed;
 	

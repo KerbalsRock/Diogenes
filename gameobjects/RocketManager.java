@@ -2,6 +2,7 @@ package gameobjects;
 import java.util.ArrayList;
 import bc.GameController;
 import bc.Planet;
+import bc.UnitType;
 import bc.VecUnit;
 
 public class RocketManager extends BuildingManager{
@@ -46,7 +47,10 @@ public class RocketManager extends BuildingManager{
 			}
 			VecUnit adjacentUnits = gc.senseNearbyUnitsByTeam(gc.unit(r.id).location().mapLocation(), 2, gc.team());
 			for(int j = 0; j < adjacentUnits.size(); j++){
-				r.load(adjacentUnits.get(i).id());
+				if(adjacentUnits.get(j).unitType().equals(UnitType.Rocket)||adjacentUnits.get(j).unitType().equals(UnitType.Factory)) {
+					continue;
+				}
+				r.load(adjacentUnits.get(j).id());
 			}
 		}
 	}

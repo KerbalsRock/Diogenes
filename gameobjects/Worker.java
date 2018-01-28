@@ -2,6 +2,7 @@ package gameobjects;
 import bc.*;
 public class Worker extends BasicUnit{
 	int currentTask = 5;
+	public boolean hasBuiltFactory = false;
 
 	public Worker(GameController gc) {
 		super(gc);
@@ -183,15 +184,19 @@ public class Worker extends BasicUnit{
 				moveToward(gc.unit(targetId).location().mapLocation());
 			}
 		case 3:
-			blueprint(UnitType.Factory);
+			if(blueprint(UnitType.Factory)) {
+				hasBuiltFactory = true;
+				currentTask = 5;
+			}
 		case 4:
 			blueprint(UnitType.Rocket);
 		case 5:
-			/*if(!harvestNearby()){
+			if(!harvestNearby()){
 				MapLocation closestKarb = closestKarbonite(1, 4);
 				if(closestKarb!=null) {
 					moveToward(closestKarb);
-				}else {*/
+					harvestNearby();
+				}else {
 					if(harvestNearby()){
 						moveRandomly();
 					}
@@ -199,8 +204,8 @@ public class Worker extends BasicUnit{
 						moveRandomly();
 						harvestNearby();
 					}
-				//}
-			//}
+				}
+			}
 		}
 	}
 
